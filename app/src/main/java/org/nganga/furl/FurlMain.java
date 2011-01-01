@@ -38,6 +38,7 @@ public class FurlMain extends AppCompatActivity {
 
     public static ParseUser currentUser;
 
+    GPSTracker gps;
 
     /** The Chat list. */
     private ArrayList<ParseUser> uList;
@@ -95,55 +96,27 @@ public class FurlMain extends AppCompatActivity {
         });
     }
 
+
+
+
     public void setUpLocation() {
 
-        LocationManager locManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-        LocationListener locListener = new MyLocationListener();
-        locManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locListener);
+        gps = new GPSTracker(FurlMain.this);
 
-    }
+        if(gps.canGetLocation()) {
+            double latitude = gps.getLatitude();
+            double longitude = gps.getLongitude();
 
-    public class MyLocationListener implements LocationListener {
-
-        @Override
-        public void onLocationChanged(Location location) {
-
-// Retrieving Latitude
-            location.getLatitude();
-// Retrieving getLongitude
-            location.getLongitude();
-
-            ParseGeoPoint userLocation = new ParseGeoPoint(location.getLatitude(), location.getLongitude());
+            ParseGeoPoint userLocation = new ParseGeoPoint(latitude, longitude);
 
             currentUser.put("location", userLocation);
             currentUser.saveEventually();
-
-// set Google Map on webview
-            /*String url = "http://maps.google.com/staticmap?center="
-                    + location.getLatitude() + "," + location.getLongitude()
-                    + "&zoom=14&size=512x512&maptype=mobile/&markers="
-                    + location.getLatitude() + "," + location.getLongitude();
-            position.loadUrl(url);*/
+        } else {
+            gps.showSettingsAlert();
         }
-
-        @Override
-        public void onProviderDisabled(String provider) {
-            Toast.makeText(getApplicationContext(), "GPS Disabled",
-                    Toast.LENGTH_SHORT).show();
-        }
-
-        @Override
-        public void onProviderEnabled(String provider) {
-            Toast.makeText(getApplicationContext(), "GPS Enabled",
-                    Toast.LENGTH_SHORT).show();
-        }
-
-        @Override
-        public void onStatusChanged(String provider, int status, Bundle extras) {
-
-        }
-
     }
+
+
 
 
 

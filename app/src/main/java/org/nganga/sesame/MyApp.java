@@ -15,17 +15,9 @@ public class MyApp extends Application {
     public void onCreate() {
         super.onCreate();
 
-        sInstance = this;
+//       P/*arse.initialize(this, "Fsq5BW0P93coLN0x8jKy4NTWksDfGsVRfofK5Z4W", "Y3GenvClzLdq4WrLgegpxrUjjx2Fv3r2bMHbCMgr");*/
     }
 
-    public static MyApp getsInstance() {
-        return sInstance;
-    }
-
-
-    public static Context getAppContext() {
-        return sInstance.getApplicationContext();
-    }
 
 
 

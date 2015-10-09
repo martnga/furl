@@ -71,7 +71,8 @@ public class Serence extends AppCompatActivity {
 
 
         LocationManager locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
-        String locationProvider = LocationManager.NETWORK_PROVIDER;
+        String locationProvider = LocationManager.GPS_PROVIDER;
+       // String locationProvider = LocationManager.NETWORK_PROVIDER;
 // Or use LocationManager.GPS_PROVIDER
 
         Location lastKnownLocation = locationManager.getLastKnownLocation(locationProvider);
@@ -102,7 +103,7 @@ public class Serence extends AppCompatActivity {
         };
 
         locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, listener);
-        locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, listener);
+      //  locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, listener);
 
 
     }

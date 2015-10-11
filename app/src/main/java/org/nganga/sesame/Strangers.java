@@ -1,6 +1,7 @@
 package org.nganga.sesame;
 
 import android.content.Context;
+import android.content.Intent;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -14,7 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class Strangers extends Fragment {
+public class Strangers extends Fragment implements StrangersRecyclerAdapter.ClickListener{
     RecyclerView strangers_list;
     StrangersRecyclerAdapter adapter;
 
@@ -36,6 +37,7 @@ public class Strangers extends Fragment {
         View layout = inflater.inflate(R.layout.fragment_strangers, container, false);
         strangers_list = (RecyclerView) layout.findViewById(R.id.strangers_list);
         adapter = new StrangersRecyclerAdapter(getActivity(),getData());
+        adapter.setClickListener(this);
         strangers_list.setAdapter(adapter);
         strangers_list.setLayoutManager(new LinearLayoutManager(getActivity()));
         return layout;
@@ -56,6 +58,13 @@ public class Strangers extends Fragment {
         }
 
         return data;
+    }
+
+    @Override
+    public void itemClicked(View view, int position) {
+
+        startActivity(new Intent(getActivity(), Settings.class));
+
     }
 }
 

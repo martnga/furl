@@ -25,7 +25,7 @@ public class StrangersRecyclerAdapter extends RecyclerView.Adapter<StrangersRecy
     List<RecyclerData> data = Collections.emptyList(); //This ensures we do not get nullPointers exception
 
     public StrangersRecyclerAdapter(Context context, List<RecyclerData> data){
-
+        this.context = context;
         inflater = LayoutInflater.from(context);
         this.data = data;
     }
@@ -60,6 +60,7 @@ public class StrangersRecyclerAdapter extends RecyclerView.Adapter<StrangersRecy
         holder.userNameHash.setText(current.userNameHashText);
         holder.icon.setImageResource(current.iconId);
     }
+
 
 
     @Override

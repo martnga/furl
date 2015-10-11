@@ -1,22 +1,21 @@
 package org.nganga.sesame;
 
 import android.content.Context;
-import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.Collections;
 import java.util.List;
 
 /**
- * Created by nganga on 9/21/15.
+ * Created by mansa on 10/11/15.
  */
-public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyViewHolder> {
+
+public class FriendsRecyclerAdapter extends RecyclerView.Adapter<FriendsRecyclerAdapter.MyViewHolder> {
 
     private LayoutInflater inflater;
 
@@ -26,7 +25,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
 
     List<RecyclerData> data = Collections.emptyList(); //This ensures we do not get nullPointers exception
 
-    public RecyclerAdapter(Context context, List<RecyclerData> data){
+    public FriendsRecyclerAdapter(Context context, List<RecyclerData> data){
 
         inflater = LayoutInflater.from(context);
         this.data = data;
@@ -53,15 +52,15 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
         return holder;
     }
 
-
-    //This is where we fill in the data items.
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
 
         RecyclerData current = data.get(position);
-        holder.title.setText(current.title);
+        holder.userNameHash.setText(current.userNameHashText);
         holder.icon.setImageResource(current.iconId);
     }
+
+
 
 
     @Override
@@ -72,13 +71,13 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
 
     class  MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
-        TextView title;
+        TextView userNameHash;
         ImageView icon;
 
         public MyViewHolder(View itemView) {
             super(itemView);
 
-            title = (TextView) itemView.findViewById(R.id.listText);
+            userNameHash = (TextView) itemView.findViewById(R.id.userNameHashText);
             icon = (ImageView) itemView.findViewById(R.id.listIcon);
             itemView.setOnClickListener(this);
         }
@@ -100,3 +99,4 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
         public void itemClicked (View view, int position);
     }
 }
+

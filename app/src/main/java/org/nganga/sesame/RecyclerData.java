@@ -6,5 +6,5 @@ package org.nganga.sesame;
 public class RecyclerData {
 
     int iconId;
-    String title;
+    String userNameHashText;
 }

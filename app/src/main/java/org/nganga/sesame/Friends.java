@@ -12,6 +12,7 @@ public class Friends extends Fragment {
 
 
     private RecyclerView friends_list;
+    FriendsRecyclerAdapter adapter;
     public Friends() {
         // Required empty public constructor
     }
@@ -28,8 +29,10 @@ public class Friends extends Fragment {
         // Inflate the layout for this fragment
         View layout = inflater.inflate(R.layout.fragment_friends, container, false);
         friends_list = (RecyclerView) layout.findViewById(R.id.friends_list);
+
         return layout;
     }
+
 
 
 }

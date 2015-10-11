@@ -22,6 +22,8 @@ import android.text.style.ImageSpan;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.parse.ParseObject;
+
 import org.nganga.sesame.tabs.SlidingTabLayout;
 
 
@@ -42,6 +44,7 @@ public class Serence extends AppCompatActivity {
         setContentView(R.layout.activity_serence);
         Toolbar toolbar = (Toolbar) findViewById(R.id.app_bar);
         setSupportActionBar(toolbar);
+
 
 
         // Creating The ViewPagerAdapter and Passing Fragment Manager, Titles fot the Tabs and Number Of Tabs.

@@ -1,4 +1,4 @@
-package org.nganga.unifurl;
+package org.nganga.furl;
 
 /**
  * Created by mansa on 10/7/15.

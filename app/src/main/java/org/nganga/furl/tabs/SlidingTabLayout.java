@@ -1,4 +1,4 @@
-package org.nganga.unifurl.tabs;
+package org.nganga.furl.tabs;
 
 /**
  * Created by nganga on 9/22/15.

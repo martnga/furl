@@ -1,7 +1,8 @@
-package org.nganga.unifurl;
+package org.nganga.furl;
 
 import android.app.Application;
 
+import com.crashlytics.android.Crashlytics;
 import com.parse.Parse;
 import com.digits.sdk.android.Digits;
 import com.twitter.sdk.android.core.TwitterAuthConfig;
@@ -27,7 +28,7 @@ public class MyApp extends Application {
     public void onCreate() {
         super.onCreate();
         TwitterAuthConfig authConfig = new TwitterAuthConfig(TWITTER_KEY, TWITTER_SECRET);
-        Fabric.with(this, new TwitterCore(authConfig), new Digits());
+        Fabric.with(this, new TwitterCore(authConfig), new Digits(), new Crashlytics());
 
 // Enable Local Datastore.
         Parse.enableLocalDatastore(this);

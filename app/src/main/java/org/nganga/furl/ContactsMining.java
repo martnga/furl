@@ -1,4 +1,4 @@
-package org.nganga.unifurl;
+package org.nganga.furl;
 
 import android.app.Activity;
 import android.database.Cursor;

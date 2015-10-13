@@ -1,4 +1,4 @@
-package org.nganga.unifurl;
+package org.nganga.furl;
 
 import android.content.Context;
 import android.location.Location;
@@ -12,7 +12,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import org.nganga.unifurl.tabs.SlidingTabLayout;
+import org.nganga.furl.tabs.SlidingTabLayout;
 
 
 public class Serence extends AppCompatActivity {

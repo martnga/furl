@@ -1,4 +1,4 @@
-package org.nganga.unifurl;
+package org.nganga.furl;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;

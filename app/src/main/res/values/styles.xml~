@@ -1,0 +1,36 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="AppTheme.Base">
+        <!-- Customize your theme here. -->
+    </style>
+
+    <style name="AppTheme.Base" parent="Theme.AppCompat.Light.NoActionBar">
+
+        <item name="colorPrimary">@color/primary</item>
+
+        <item name="colorPrimaryDark">@color/primary_dark</item>
+
+        <item name="android:colorAccent">@color/accent</item>
+
+        <item name="android:textColorPrimary">@color/primary_text</item>
+        <item name="android:textColorSecondary">@color/secondary_text</item>
+
+        <item name="android:colorControlHighlight">@color/secondary_text</item>
+
+        <item name="android:windowBackground">@color/icons</item>
+
+
+    </style>
+
+
+    <style name="CustomDigitsTheme" parent="android:Theme.Light">
+        <item name="android:textColorPrimary">@color/primary_text</item>
+        <item name="android:textColorSecondary">@color/icons</item>
+
+        <item name="android:windowBackground">@color/primary</item>
+        <item name="android:textColorLink">@color/accent</item>
+        <item name="dgts__accentColor">@color/accent</item>
+    </style>
+
+</resources>

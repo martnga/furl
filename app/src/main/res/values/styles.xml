@@ -19,18 +19,19 @@
         <item name="android:colorControlHighlight">@color/secondary_text</item>
 
         <item name="android:windowBackground">@color/icons</item>
+        <item name="dgts__accentColor">@color/primary</item>
 
 
     </style>
 
 
-    <style name="CustomDigitsTheme" parent="android:Theme.Light">
-        <item name="android:textColorPrimary">@color/primary_text</item>
-        <item name="android:textColorSecondary">@color/icons</item>
 
-        <item name="android:windowBackground">@color/primary</item>
-        <item name="android:textColorLink">@color/accent</item>
-        <item name="dgts__accentColor">@color/accent</item>
+    <style name="placeholder">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@drawable/placeholder</item>
+        <item name="android:padding">@dimen/word_container_padding</item>
     </style>
+
 
 </resources>

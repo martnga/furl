@@ -1,67 +1,112 @@
 package org.nganga.furl;
 
-import android.support.v7.app.AppCompatActivity;
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
-import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.crashlytics.android.Crashlytics;
+import com.crashlytics.android.answers.Answers;
 import com.digits.sdk.android.AuthCallback;
 import com.digits.sdk.android.DigitsAuthButton;
 import com.digits.sdk.android.DigitsException;
 import com.digits.sdk.android.DigitsSession;
+import com.twitter.sdk.android.core.Callback;
+import com.twitter.sdk.android.core.Result;
+import com.twitter.sdk.android.core.TwitterException;
+import com.twitter.sdk.android.core.TwitterSession;
+import com.twitter.sdk.android.core.identity.TwitterLoginButton;
 
+import org.nganga.furl.R;
+import org.nganga.furl.SessionRecorder;
 
-public class Login extends AppCompatActivity {
+public class Login extends Activity {
+
+    private TwitterLoginButton twitterButton;
+    private DigitsAuthButton phoneButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.app_bar);
-        setSupportActionBar(toolbar);
 
+        setUpViews();
+    }
 
-        DigitsAuthButton digitsButton = (DigitsAuthButton) findViewById(R.id.auth_button);
-        digitsButton.setCallback(new AuthCallback() {
+    private void setUpViews() {
+        setUpSkip();
+        setUpTwitterButton();
+        setUpDigitsButton();
+    }
+
+    private void setUpTwitterButton() {
+        twitterButton = (TwitterLoginButton) findViewById(R.id.twitter_button);
+        twitterButton.setCallback(new Callback<TwitterSession>() {
             @Override
-            public void success(DigitsSession session, String phoneNumber) {
-                // TODO: associate the session userID with your user model
-                Toast.makeText(getApplicationContext(), "Authentication successful for "
-                        + phoneNumber, Toast.LENGTH_LONG).show();
+            public void success(Result<TwitterSession> result) {
+                SessionRecorder.recordSessionActive("Login: twitter account active", result.data);
+                Answers.getInstance().logEvent("login:twitter:success");
+                startThemeChooser();
             }
 
             @Override
-            public void failure(DigitsException exception) {
-                Log.d("Digits", "Sign in with Digits failure", exception);
+            public void failure(TwitterException exception) {
+                Answers.getInstance().logEvent("login:twitter:failure");
+                Toast.makeText(getApplicationContext(),
+                        getResources().getString(R.string.toast_twitter_signin_fail),
+                        Toast.LENGTH_SHORT).show();
+                Crashlytics.logException(exception);
             }
         });
-        digitsButton.setAuthTheme(R.style.CustomDigitsTheme);
+    }
 
+    private void setUpDigitsButton() {
+        phoneButton = (DigitsAuthButton) findViewById(R.id.phone_button);
+        phoneButton.setAuthTheme(R.style.AppTheme);
+        phoneButton.setCallback(new AuthCallback() {
+            @Override
+            public void success(DigitsSession digitsSession, String phoneNumber) {
+                SessionRecorder.recordSessionActive("Login: digits account active", digitsSession);
+                Answers.getInstance().logEvent("login:digits:success");
+                startThemeChooser();
+            }
 
+            @Override
+            public void failure(DigitsException e) {
+                Answers.getInstance().logEvent("login:digits:failure");
+                Toast.makeText(getApplicationContext(),
+                        getResources().getString(R.string.toast_twitter_digits_fail),
+                        Toast.LENGTH_SHORT).show();
+                Crashlytics.logException(e);
+            }
+        });
+    }
+
+    private void setUpSkip() {
+        TextView skipButton;
+        skipButton = (TextView) findViewById(R.id.skip);
+        skipButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Crashlytics.log("Login: skipped login");
+                Answers.getInstance().logEvent("skipped login");
+                startThemeChooser();
+                overridePendingTransition(R.anim.slide_down, R.anim.slide_up);
+            }
+        });
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_login, menu);
-        return true;
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        twitterButton.onActivityResult(requestCode, resultCode, data);
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
+    private void startThemeChooser() {
+        final Intent themeChooserIntent = new Intent(LoginActivity.this,
+                ThemeChooserActivity.class);
+        startActivity(themeChooserIntent);
     }
 }

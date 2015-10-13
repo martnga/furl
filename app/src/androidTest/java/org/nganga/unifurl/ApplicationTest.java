@@ -1,4 +1,4 @@
-package org.nganga.sesame;
+package org.nganga.unifurl;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;

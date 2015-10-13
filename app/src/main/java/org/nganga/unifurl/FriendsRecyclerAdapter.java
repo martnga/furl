@@ -1,4 +1,4 @@
-package org.nganga.sesame;
+package org.nganga.unifurl;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -12,9 +12,10 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * Created by nganga on 9/21/15.
+ * Created by mansa on 10/11/15.
  */
-public class StrangersRecyclerAdapter extends RecyclerView.Adapter<StrangersRecyclerAdapter.MyViewHolder> {
+
+public class FriendsRecyclerAdapter extends RecyclerView.Adapter<FriendsRecyclerAdapter.MyViewHolder> {
 
     private LayoutInflater inflater;
 
@@ -24,8 +25,8 @@ public class StrangersRecyclerAdapter extends RecyclerView.Adapter<StrangersRecy
 
     List<RecyclerData> data = Collections.emptyList(); //This ensures we do not get nullPointers exception
 
-    public StrangersRecyclerAdapter(Context context, List<RecyclerData> data){
-        this.context = context;
+    public FriendsRecyclerAdapter(Context context, List<RecyclerData> data){
+
         inflater = LayoutInflater.from(context);
         this.data = data;
     }
@@ -51,8 +52,6 @@ public class StrangersRecyclerAdapter extends RecyclerView.Adapter<StrangersRecy
         return holder;
     }
 
-
-    //This is where we fill in the data items.
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
 
@@ -60,6 +59,7 @@ public class StrangersRecyclerAdapter extends RecyclerView.Adapter<StrangersRecy
         holder.userNameHash.setText(current.userNameHashText);
         holder.icon.setImageResource(current.iconId);
     }
+
 
 
 
@@ -99,3 +99,4 @@ public class StrangersRecyclerAdapter extends RecyclerView.Adapter<StrangersRecy
         public void itemClicked (View view, int position);
     }
 }
+

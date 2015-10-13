@@ -1,9 +1,7 @@
-package org.nganga.sesame;
+package org.nganga.unifurl;
 
 import android.app.Activity;
-import android.content.Context;
 import android.database.Cursor;
-import android.location.LocationManager;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.util.Log;

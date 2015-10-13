@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="org.nganga.sesame" >
+    package="org.nganga.unifurl" >
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -9,13 +9,13 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
     <application
-        android:name=".MyApp"
+        android:name="org.nganga.unifurl.MyApp"
         android:allowBackup="true"
         android:icon="@drawable/icon"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name=".Serence"
+            android:name="org.nganga.unifurl.Serence"
             android:icon="@drawable/icon"
             android:label="@string/app_name" >
             <intent-filter>
@@ -25,17 +25,17 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Settings"
+            android:name="org.nganga.unifurl.Settings"
             android:icon="@drawable/icon"
             android:label="@string/title_activity_profile" >
 
             <!-- This set the parent of profile as Main Activity so as to allow working of home button on Toolbar -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".Settings" />
+                android:value="org.nganga.unifurl.Settings" />
         </activity>
         <activity
-            android:name=".Login"
+            android:name="org.nganga.unifurl.Login"
             android:label="@string/title_activity_login" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -44,9 +44,10 @@
             </intent-filter>
         </activity>
 
+
         <meta-data
             android:name="io.fabric.ApiKey"
-            android:value="69e3f709403e07dd0bdbaa45e4ee8e9b6057df32" />
+            android:value="afea31c702123a30682e6c6b4f2e61fa36237bee" />
     </application>
 
 </manifest>

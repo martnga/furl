@@ -1,4 +1,4 @@
-package org.nganga.sesame;
+package org.nganga.unifurl;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;

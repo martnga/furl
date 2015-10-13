@@ -1,4 +1,4 @@
-package org.nganga.sesame;
+package org.nganga.unifurl;
 
 /**
  * Created by nganga on 9/21/15.

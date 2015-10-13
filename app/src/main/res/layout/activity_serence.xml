@@ -4,14 +4,14 @@
               android:layout_width="match_parent"
               android:layout_height="match_parent"
               android:orientation="vertical"
-              tools:context="org.nganga.sesame.Serence">
+              tools:context="org.nganga.unifurl.Serence">
 
     <include
         android:id="@+id/app_bar"
         layout="@layout/app_bar" />
 
 
-    <org.nganga.sesame.tabs.SlidingTabLayout
+    <org.nganga.unifurl.tabs.SlidingTabLayout
         android:id="@+id/tab_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

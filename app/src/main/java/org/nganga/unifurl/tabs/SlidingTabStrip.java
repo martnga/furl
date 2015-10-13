@@ -1,4 +1,4 @@
-package org.nganga.sesame.tabs;
+package org.nganga.unifurl.tabs;
 
 /**
  * Created by nganga on 9/22/15.

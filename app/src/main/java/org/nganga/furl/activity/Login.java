@@ -14,6 +14,9 @@ import com.digits.sdk.android.AuthCallback;
 import com.digits.sdk.android.DigitsAuthButton;
 import com.digits.sdk.android.DigitsException;
 import com.digits.sdk.android.DigitsSession;
+import com.parse.ParseException;
+import com.parse.ParseObject;
+import com.parse.SaveCallback;
 import com.twitter.sdk.android.core.Callback;
 import com.twitter.sdk.android.core.Result;
 import com.twitter.sdk.android.core.TwitterException;
@@ -23,6 +26,7 @@ import com.twitter.sdk.android.core.identity.TwitterLoginButton;
 import org.nganga.furl.FurlMain;
 import org.nganga.furl.R;
 import org.nganga.furl.SessionRecorder;
+import org.nganga.furl.custom.CustomActivity;
 
 public class Login extends Activity {
 
@@ -45,7 +49,7 @@ public class Login extends Activity {
 
     private void setUpTwitterButton() {
         twitterButton = (TwitterLoginButton) findViewById(R.id.twitter_button);
-        twitterButton.setCallback(new Callback<TwitterSession>() {
+        /*twitterButton.setCallback(new Callback<TwitterSession>() {
             @Override
             public void success(Result<TwitterSession> result) {
                 SessionRecorder.recordSessionActive("Login: twitter account active", result.data);
@@ -61,7 +65,7 @@ public class Login extends Activity {
                         Toast.LENGTH_SHORT).show();
                 Crashlytics.logException(exception);
             }
-        });
+        });*/
     }
 
     private void setUpDigitsButton() {
@@ -72,7 +76,22 @@ public class Login extends Activity {
             public void success(DigitsSession digitsSession, String phoneNumber) {
                 SessionRecorder.recordSessionActive("Login: digits account active", digitsSession);
                 Answers.getInstance().logCustom(new CustomEvent("login:digits:success"));
-                startApp();
+                ParseObject po = new ParseObject("USERS");
+                po.put("phoneNumber", phoneNumber);
+                po.put("installed", true);
+                po.saveEventually(new SaveCallback() {
+
+                    @Override
+                    public void done(ParseException e) {
+                        if (e == null) {
+                            startApp();
+                        } else {
+
+                        }
+
+                    }
+                });
+
             }
 
             @Override
@@ -107,7 +126,10 @@ public class Login extends Activity {
     }
 
     private void startApp() {
-        final Intent furlMainIntent = new Intent(Login.this,
+
+
+
+    final Intent furlMainIntent = new Intent(Login.this,
                 FurlMain.class);
         startActivity(furlMainIntent);
     }

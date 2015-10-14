@@ -2,6 +2,7 @@ package org.nganga.furl;
 
 
 import android.app.Activity;
+import android.content.Intent;
 import android.support.v4.app.NavUtils;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
@@ -14,7 +15,12 @@ import android.widget.Button;
 import android.widget.ImageView;
 
 import com.digits.sdk.android.Digits;
+import com.parse.ParseException;
+import com.parse.ParseObject;
+import com.parse.SaveCallback;
 import com.twitter.sdk.android.Twitter;
+
+import org.nganga.furl.activity.Login;
 
 
 public class AccountSettings extends Activity {
@@ -68,7 +74,22 @@ public class AccountSettings extends Activity {
     public void deleteSession(){
 
         Digits.getSessionManager().clearActiveSession();
-        Twitter.getSessionManager().clearActiveSession();
+        ParseObject po = new ParseObject("USERS");
+        po.put("installed", false);
+        po.saveEventually(new SaveCallback() {
+
+            @Override
+            public void done(ParseException e) {
+                if (e == null) {
+                    final Intent signout = new Intent(getApplicationContext(),
+                            Login.class);
+                    startActivity(signout);
+                } else {
+
+                }
+
+            }
+        });
     }
 
 

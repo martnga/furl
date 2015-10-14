@@ -1,32 +1,27 @@
 package org.nganga.furl;
 
-
 import android.app.Activity;
-import android.support.v4.app.NavUtils;
-import android.support.v4.view.ViewPager;
+import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 
+import com.crashlytics.android.Crashlytics;
 
-public class AccountSettings extends Activity {
-
-    private ViewPager viewPager;
+/**
+ * Created by mansa on 10/14/15.
+ */
+public class Conversation extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_settings);
+        setContentView(R.layout.conversation);
 
         setUpViews();
     }
 
     private void setUpViews() {
-        setUpCount();
         setUpBack();
 
     }
@@ -41,16 +36,13 @@ public class AccountSettings extends Activity {
             }
         });
     }
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Crashlytics.log("Conversations: getting back to FriendsList");
+            final Intent intent = new Intent(getApplicationContext(), Friends.class);
+            startActivity(intent);
 
-    private void setUpCount() {
-        // go back if clicked
-        final ImageView backButton = (ImageView) findViewById(R.id.back);
-        backButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
     }
 
 }

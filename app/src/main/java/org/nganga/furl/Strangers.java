@@ -61,7 +61,7 @@ public class Strangers extends Fragment implements StrangersRecyclerAdapter.Clic
     @Override
     public void itemClicked(View view, int position) {
 
-        startActivity(new Intent(getActivity(), Settings.class));
+        startActivity(new Intent(getActivity(), AccountSettings.class));
 
     }
 }

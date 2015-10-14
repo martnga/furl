@@ -1,128 +1,70 @@
 package org.nganga.furl;
 
-import android.content.Context;
-import android.location.Location;
-import android.location.LocationListener;
-import android.location.LocationManager;
-import android.support.v4.app.NavUtils;
-import android.support.v4.view.ViewPager;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageView;
 
-import org.nganga.furl.tabs.SlidingTabLayout;
+import com.crashlytics.android.Crashlytics;
+import com.crashlytics.android.answers.Answers;
+import com.crashlytics.android.answers.CustomEvent;
 
 
 public class FurlMain extends AppCompatActivity {
 
 
-    private ViewPager viewPager;
-    Toolbar toolbar;
-    ViewPager pager;
-    SerencePagerAdapter adapter;
-    SlidingTabLayout tabs;
-    CharSequence Titles[]={"Strangers","Friends"};
-    int Numboftabs =2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_serence);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.app_bar);
-        setSupportActionBar(toolbar);
+        setContentView(R.layout.furl);
+        setUpViews();
+    }
 
+    private void setUpViews() {
+        FetchContacts();
+        setFriends();
+        setAccount();
+    }
 
-
-        // Creating The ViewPagerAdapter and Passing Fragment Manager, Titles fot the Tabs and Number Of Tabs.
-        adapter =  new SerencePagerAdapter(getSupportFragmentManager(),Titles,Numboftabs);
-
-        // Assigning ViewPager View and setting the adapter
-        pager = (ViewPager) findViewById(R.id.viewPager);
-        pager.setAdapter(adapter);
-
-        // Assiging the Sliding Tab Layout View
-        tabs = (SlidingTabLayout) findViewById(R.id.tab_layout);
-        tabs.setDistributeEvenly(true); // To make the Tabs Fixed set this true, This makes the tabs Space Evenly in Available width
-
-        // Setting Custom Color for the Scroll bar indicator of the Tab View
-        tabs.setCustomTabColorizer(new SlidingTabLayout.TabColorizer() {
+    private void FetchContacts() {
+        final ImageView icon = (ImageView) findViewById(R.id.cannonball_logo);
+        icon.setOnClickListener(new View.OnClickListener() {
             @Override
-            public int getIndicatorColor(int position) {
-                return getResources().getColor(R.color.accent);
+            public void onClick(View v) {
+                Crashlytics.log("FurlMain: clicked Contacts button");
+                Answers.getInstance().logCustom(new CustomEvent("clicked contacts"));
+                final Intent intent = new Intent(getApplicationContext(), ContactsMining.class);
+                startActivity(intent);
             }
         });
-
-
-
-        // Setting the ViewPager For the SlidingTabsLayout
-        tabs.setViewPager(pager);
-
-
-
-        LocationManager locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
-        String locationProvider = LocationManager.GPS_PROVIDER;
-       // String locationProvider = LocationManager.NETWORK_PROVIDER;
-// Or use LocationManager.GPS_PROVIDER
-
-        Location lastKnownLocation = locationManager.getLastKnownLocation(locationProvider);
-
-        LocationListener listener = new LocationListener() {
-            @Override
-            public void onLocationChanged(Location location) {
-
-                String mLatitude = location.getLatitude() + "";
-                String mLongitude = location.getLongitude() + "";
-
-            }
-
-            @Override
-            public void onStatusChanged(String provider, int status, Bundle extras) {
-
-            }
-
-            @Override
-            public void onProviderEnabled(String provider) {
-
-            }
-
-            @Override
-            public void onProviderDisabled(String provider) {
-
-            }
-        };
-
-        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, listener);
-      //  locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, listener);
-
-
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        return true;
+    private void setFriends() {
+        final ImageView popular = (ImageView) findViewById(R.id.popular);
+        popular.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Crashlytics.log("FurlMain: clicked friends button");
+                Answers.getInstance().logCustom(new CustomEvent("clicked friends"));
+                Intent intent = new Intent(getApplicationContext(), Friends.class);
+                startActivity(intent);
+            }
+        });
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-
-        //This add the back functionality for Home button
-
-        if (id == android.R.id.home){
-
-            NavUtils.navigateUpFromSameTask(this);
-        }
-
-        return super.onOptionsItemSelected(item);
+    private void setAccount() {
+        final ImageView history = (ImageView) findViewById(R.id.history);
+        history.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Crashlytics.log("FurlMain: clicked settings button");
+                Answers.getInstance().logCustom(new CustomEvent("clicked AccountSettings"));
+                final Intent intent = new Intent(getApplicationContext(),
+                        AccountSettings.class);
+                startActivity(intent);
+            }
+        });
     }
-
-
 }

@@ -11,7 +11,7 @@ import android.view.MenuItem;
 
 
 
-public class Settings extends AppCompatActivity {
+public class AccountSettings extends AppCompatActivity {
 
     private ViewPager viewPager;
 

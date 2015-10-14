@@ -35,6 +35,6 @@ public class SessionRecorder {
                                            boolean active) {
         Crashlytics.log(message);
         Crashlytics.setUserIdentifier(userIdentifier);
-        Crashlytics.setBool(App.CRASHLYTICS_KEY_SESSION_ACTIVATED, active);
+        Crashlytics.setBool(MyApp.CRASHLYTICS_KEY_SESSION_ACTIVATED, active);
     }
 }

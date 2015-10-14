@@ -5,43 +5,32 @@ import android.app.Application;
 import com.crashlytics.android.Crashlytics;
 import com.parse.Parse;
 import com.digits.sdk.android.Digits;
+import com.twitter.sdk.android.Twitter;
 import com.twitter.sdk.android.core.TwitterAuthConfig;
-import com.twitter.sdk.android.core.TwitterCore;
 import io.fabric.sdk.android.Fabric;
 
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Typeface;
-import android.os.Environment;
 import android.preference.PreferenceManager;
 
-import java.io.File;
 
-i
+
 /**
  * Created by nganga on 9/24/15.
  */
 public class MyApp extends Application {
 
 
-    public final static String CRASHLYTICS_KEY_THEME = "theme";
+
     public final static String CRASHLYTICS_KEY_SESSION_ACTIVATED = "session_activated";
-    public final static String CRASHLYTICS_KEY_SEARCH_COUNT = "last_twitter_search_result_count";
-    public final static String CRASHLYTICS_KEY_COUNTDOWN = "countdown_timer_remaining_sec";
-    public final static String CRASHLYTICS_KEY_WORDBANK_COUNT = "word_bank_count_loaded";
-    public final static String CRASHLYTICS_KEY_POEM_TEXT = "saving_poem_text";
-    public final static String CRASHLYTICS_KEY_POEM_IMAGE = "saving_poem_image";
     public final static String CRASHLYTICS_KEY_CRASHES = "are_crashes_enabled";
 
     private static MyApp singleton;
     private TwitterAuthConfig authConfig;
     private Typeface avenirFont;
 
-    public static MyApp getInstance() {
-        return singleton;
-    }
 
-    return false;
-    }
 
     // Note: Your consumer key and secret should be obfuscated in your source code before shipping.
     private static final String TWITTER_KEY = "0L3nSKwwSjc36Hw5qjwOds4fV";
@@ -53,8 +42,9 @@ public class MyApp extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        singleton = this;
         TwitterAuthConfig authConfig = new TwitterAuthConfig(TWITTER_KEY, TWITTER_SECRET);
-        Fabric.with(this, new TwitterCore(authConfig), new Digits(), new Crashlytics());
+        Fabric.with(this, new Digits(), new Crashlytics(), new Twitter(authConfig));
 
         Crashlytics.setBool(CRASHLYTICS_KEY_CRASHES, areCrashesEnabled());
 
@@ -65,9 +55,17 @@ public class MyApp extends Application {
     }
 
 
+    public static MyApp getInstance() {
+        return singleton;
+    }
+
+    public static Context getAppContext() {
+        return singleton.getApplicationContext();
+    }
+
 
    private void extractAvenir() {
-        avenirFont = Typeface.createFromAsset(getAssets(), "fonts/Avenir.ttc");
+        avenirFont = Typeface.createFromAsset(getAppContext().getAssets(), "fonts/OpenSans-Light.ttf");
     }
 
     public Typeface getTypeface() {

@@ -6,21 +6,21 @@ import android.util.AttributeSet;
 
 import com.twitter.sdk.android.core.identity.TwitterLoginButton;
 
-import io.fabric.samples.cannonball.App;
-import io.fabric.samples.cannonball.R;
+import org.nganga.furl.MyApp;
+import org.nganga.furl.R;
 
-public class CannonballTwitterLoginButton extends TwitterLoginButton {
-    public CannonballTwitterLoginButton(Context context) {
+public class FurlTwitterLoginButton extends TwitterLoginButton {
+    public FurlTwitterLoginButton(Context context) {
         super(context);
         init();
     }
 
-    public CannonballTwitterLoginButton(Context context, AttributeSet attrs) {
+    public FurlTwitterLoginButton(Context context, AttributeSet attrs) {
         super(context, attrs);
         init();
     }
 
-    public CannonballTwitterLoginButton(Context context, AttributeSet attrs, int defStyle) {
+    public FurlTwitterLoginButton(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
         init();
     }
@@ -35,6 +35,6 @@ public class CannonballTwitterLoginButton extends TwitterLoginButton {
         setTextSize(20);
         setPadding(30, 0, 10, 0);
         setTextColor(getResources().getColor(R.color.tw__blue_default));
-        setTypeface(App.getInstance().getTypeface());
+        setTypeface(MyApp.getInstance().getTypeface());
     }
 }

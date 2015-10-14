@@ -8,23 +8,23 @@ import android.util.AttributeSet;
 
 import com.digits.sdk.android.DigitsAuthButton;
 
-import io.fabric.samples.cannonball.App;
-import io.fabric.samples.cannonball.R;
+import org.nganga.furl.MyApp;
+import org.nganga.furl.R;
 
-public class CannonballDigitsAuthButton extends DigitsAuthButton {
-    public CannonballDigitsAuthButton(Context context) {
+public class FurlDigitsAuthButton extends DigitsAuthButton {
+    public FurlDigitsAuthButton(Context context) {
         super(context);
         init();
     }
 
-    public CannonballDigitsAuthButton(Context context, AttributeSet attrs) {
+    public FurlDigitsAuthButton(Context context, AttributeSet attrs) {
         super(context, attrs);
         init();
     }
 
 
 
-    public CannonballDigitsAuthButton(Context context, AttributeSet attrs, int defStyle) {
+    public FurlDigitsAuthButton(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
         init();
     }
@@ -38,6 +38,6 @@ public class CannonballDigitsAuthButton extends DigitsAuthButton {
         setBackgroundResource(R.drawable.digits_button);
         setTextSize(20);
         setTextColor(getResources().getColor(R.color.green));
-        setTypeface(App.getInstance().getTypeface());
+        setTypeface(MyApp.getInstance().getTypeface());
     }
 }

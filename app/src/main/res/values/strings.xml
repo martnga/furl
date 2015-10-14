@@ -75,6 +75,7 @@
     <string name="mystery">#Mystery</string>
     <string name="nature">#Nature</string>
     <string name="romance">#Romance</string>
+    <string name="log_out">DELETE ACCOUNT</string>
 
     <string-array name="wordbank_suffixes">
         <item>d</item>

@@ -78,6 +78,9 @@
     <string name="log_out">DELETE ACCOUNT</string>
     <string name="err_signup">Network Error. Please Try Again.</string>
     <string name="saveSettings">Save</string>
+    <string name="alert_loading">Loading Furls</string>
+    <string name="msg_no_user_found">No Furls  Around</string>
+    <string name="err_users">Try Refresh</string>
 
     <string-array name="wordbank_suffixes">
         <item>d</item>

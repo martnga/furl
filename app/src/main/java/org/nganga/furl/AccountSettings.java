@@ -5,13 +5,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.support.design.widget.TextInputLayout;
-import android.support.v4.app.NavUtils;
-import android.support.v4.view.ViewPager;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -19,14 +13,9 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.digits.sdk.android.Digits;
-import com.parse.ParseException;
-import com.parse.ParseObject;
 import com.parse.ParseUser;
-import com.parse.SaveCallback;
-import com.twitter.sdk.android.Twitter;
 
 import org.nganga.furl.activity.InitialActivity;
-import org.nganga.furl.activity.Login;
 
 
 public class AccountSettings extends Activity {
@@ -106,7 +95,7 @@ public class AccountSettings extends Activity {
         if (isStatusEmpty && isUsernameEmpty){
 
             Context context = getApplicationContext();
-            CharSequence text = "We Should Fill In All The Fields.";
+            CharSequence text = "All The Fields!";
             int duration = Toast.LENGTH_SHORT;
 
             Toast toast = Toast.makeText(context, text, duration);
@@ -158,7 +147,6 @@ public class AccountSettings extends Activity {
         startActivity(intent);
 
     }
-
 
 
 }

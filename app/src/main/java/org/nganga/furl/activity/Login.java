@@ -81,7 +81,7 @@ public class Login extends Activity {
                 SessionRecorder.recordSessionActive("Login: digits account active", digitsSession);
                 Answers.getInstance().logCustom(new CustomEvent("login:digits:success"));
                 final ParseUser pu = new ParseUser();
-                pu.setUsername(phoneNumber);
+                pu.put("phoneNumber", phoneNumber);
                 pu.put("installed", true);
                 pu.signUpInBackground(new SignUpCallback() {
 

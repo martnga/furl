@@ -46,7 +46,7 @@
     </RelativeLayout>
 
     <ListView
-        android:id="@+id/theme_list"
+        android:id="@+id/furls_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:divider="@null"/>

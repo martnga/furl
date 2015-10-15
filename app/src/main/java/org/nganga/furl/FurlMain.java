@@ -1,7 +1,11 @@
 package org.nganga.furl;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -18,6 +22,8 @@ import com.crashlytics.android.answers.Answers;
 import com.crashlytics.android.answers.CustomEvent;
 import com.parse.FindCallback;
 import com.parse.ParseException;
+import com.parse.ParseGeoPoint;
+import com.parse.ParseQuery;
 import com.parse.ParseUser;
 
 import org.nganga.furl.utils.Utils;
@@ -40,6 +46,7 @@ public class FurlMain extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.furl);
         setUpViews();
+        setUpLocation();
     }
 
     private void setUpViews() {
@@ -88,6 +95,57 @@ public class FurlMain extends AppCompatActivity {
         });
     }
 
+    public void setUpLocation() {
+
+        LocationManager locManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        LocationListener locListener = new MyLocationListener();
+        locManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locListener);
+
+    }
+
+    public class MyLocationListener implements LocationListener {
+
+        @Override
+        public void onLocationChanged(Location location) {
+
+// Retrieving Latitude
+            location.getLatitude();
+// Retrieving getLongitude
+            location.getLongitude();
+
+            ParseGeoPoint userLocation = new ParseGeoPoint(location.getLatitude(), location.getLongitude());
+
+            currentUser.put("location", userLocation);
+            currentUser.saveEventually();
+
+// set Google Map on webview
+            /*String url = "http://maps.google.com/staticmap?center="
+                    + location.getLatitude() + "," + location.getLongitude()
+                    + "&zoom=14&size=512x512&maptype=mobile/&markers="
+                    + location.getLatitude() + "," + location.getLongitude();
+            position.loadUrl(url);*/
+        }
+
+        @Override
+        public void onProviderDisabled(String provider) {
+            Toast.makeText(getApplicationContext(), "GPS Disabled",
+                    Toast.LENGTH_SHORT).show();
+        }
+
+        @Override
+        public void onProviderEnabled(String provider) {
+            Toast.makeText(getApplicationContext(), "GPS Enabled",
+                    Toast.LENGTH_SHORT).show();
+        }
+
+        @Override
+        public void onStatusChanged(String provider, int status, Bundle extras) {
+
+        }
+
+    }
+
+
 
 
     /* (non-Javadoc)
@@ -105,12 +163,15 @@ public class FurlMain extends AppCompatActivity {
     /**
      * Load list of users.
      */
-    private void loadUserList()
-    {
+    private void loadUserList() {
         final ProgressDialog dia = ProgressDialog.show(this, null,
                 getString(R.string.alert_loading));
-        ParseUser.getQuery().whereNotEqualTo("username", currentUser.getUsername())
-                .findInBackground(new FindCallback<ParseUser>() {
+        ParseGeoPoint userLocation = (ParseGeoPoint) currentUser.get("location");
+        ParseQuery<ParseUser> query = ParseUser.getQuery();
+        query.whereNotEqualTo("username", currentUser.getUsername());
+        query.whereNear("location", userLocation);
+        query.setLimit(25);
+        query.findInBackground(new FindCallback<ParseUser>() {
 
             @Override
             public void done(List<ParseUser> li, ParseException e) {

@@ -16,17 +16,21 @@ import com.digits.sdk.android.DigitsException;
 import com.digits.sdk.android.DigitsSession;
 import com.parse.ParseException;
 import com.parse.ParseObject;
+import com.parse.ParseUser;
 import com.parse.SaveCallback;
+import com.parse.SignUpCallback;
 import com.twitter.sdk.android.core.Callback;
 import com.twitter.sdk.android.core.Result;
 import com.twitter.sdk.android.core.TwitterException;
 import com.twitter.sdk.android.core.TwitterSession;
 import com.twitter.sdk.android.core.identity.TwitterLoginButton;
 
+import org.nganga.furl.AccountSettings;
 import org.nganga.furl.FurlMain;
 import org.nganga.furl.R;
 import org.nganga.furl.SessionRecorder;
 import org.nganga.furl.custom.CustomActivity;
+import org.nganga.furl.utils.Utils;
 
 public class Login extends Activity {
 
@@ -76,19 +80,25 @@ public class Login extends Activity {
             public void success(DigitsSession digitsSession, String phoneNumber) {
                 SessionRecorder.recordSessionActive("Login: digits account active", digitsSession);
                 Answers.getInstance().logCustom(new CustomEvent("login:digits:success"));
-                ParseObject po = new ParseObject("USERS");
-                po.put("phoneNumber", phoneNumber);
-                po.put("installed", true);
-                po.saveEventually(new SaveCallback() {
+                final ParseUser pu = new ParseUser();
+                pu.setUsername(phoneNumber);
+                pu.put("installed", true);
+                pu.signUpInBackground(new SignUpCallback() {
 
                     @Override
                     public void done(ParseException e) {
                         if (e == null) {
+                            FurlMain.currentUser = pu;
+                            AccountSettings.user = pu;
                             startApp();
+                            finish();
                         } else {
-
+                            Utils.showDialog(
+                                    getApplicationContext(),
+                                    getString(R.string.err_signup) + " "
+                                            + e.getMessage());
+                            e.printStackTrace();
                         }
-
                     }
                 });
 
@@ -129,8 +139,8 @@ public class Login extends Activity {
 
 
 
-    final Intent furlMainIntent = new Intent(Login.this,
-                FurlMain.class);
-        startActivity(furlMainIntent);
+    final Intent intent = new Intent(Login.this,
+                AccountSettings.class);
+        startActivity(intent);
     }
 }

@@ -9,12 +9,13 @@ import android.widget.ImageView;
 import com.crashlytics.android.Crashlytics;
 import com.crashlytics.android.answers.Answers;
 import com.crashlytics.android.answers.CustomEvent;
+import com.parse.ParseUser;
 
 
 public class FurlMain extends AppCompatActivity {
 
 
-
+    public static ParseUser currentUser;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,4 +68,6 @@ public class FurlMain extends AppCompatActivity {
             }
         });
     }
+
+
 }

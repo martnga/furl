@@ -40,7 +40,7 @@
             android:layout_centerVertical="true"
             android:layout_marginRight="@dimen/top_bar_right_side_button_margin_end"
             android:layout_marginEnd="@dimen/top_bar_right_side_button_margin_end"
-            android:contentDescription="@string/content_desc_popular"
+            android:contentDescription="Popular"
             android:src="@drawable/ic_popular"
             android:tint="@color/green" />
     </RelativeLayout>

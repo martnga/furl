@@ -24,7 +24,7 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_centerHorizontal="true"
-            android:text="@string/poem_history_title"
+            android:text=""
             android:textColor="@color/green"
             android:textSize="@dimen/top_bar_text_size"
             />

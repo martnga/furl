@@ -2,8 +2,10 @@ package org.nganga.furl;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,7 +21,6 @@ import com.parse.ParseException;
 import com.parse.ParseUser;
 
 import org.nganga.furl.utils.Const;
-import org.nganga.furl.utils.Utils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -47,6 +48,7 @@ public class Friends extends Activity{
     private void setUpViews() {
         setUpCount();
         setUpBack();
+        setUpRequests();
 
     }
 
@@ -64,6 +66,17 @@ public class Friends extends Activity{
     private void setUpCount() {
         // go back if clicked
         final ImageView backButton = (ImageView) findViewById(R.id.back);
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+    }
+
+    private void setUpRequests() {
+        // go back if clicked
+        final ImageView backButton = (ImageView) findViewById(R.id.tick);
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -97,11 +110,9 @@ public class Friends extends Activity{
                 .findInBackground(new FindCallback<ParseUser>() {
 
                     @Override
-                    public void done(List<ParseUser> li, ParseException e)
-                    {
+                    public void done(List<ParseUser> li, ParseException e) {
                         dia.dismiss();
-                        if (li != null)
-                        {
+                        if (li != null) {
                             if (li.size() == 0)
                                 Toast.makeText(Friends.this,
                                         R.string.msg_no_user_found,
@@ -114,21 +125,27 @@ public class Friends extends Activity{
 
                                 @Override
                                 public void onItemClick(AdapterView<?> arg0,
-                                                        View arg1, int pos, long arg3)
-                                {
+                                                        View arg1, int pos, long arg3) {
                                     startActivity(new Intent(Friends.this,
                                             Chat.class).putExtra(
                                             Const.EXTRA_DATA, uList.get(pos)
                                                     .getUsername()));
                                 }
                             });
-                        }
-                        else
-                        {
-                            Utils.showDialog(
-                                    Friends.this,
-                                    getString(R.string.err_users) + " "
-                                            + e.getMessage());
+                        } else {
+                            AlertDialog.Builder builder = new AlertDialog.Builder(Friends.this);
+                            builder.setMessage(e.getMessage());
+                            builder.setTitle("Sorry Mate");
+                            builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    //to close the dialog
+                                    dialogInterface.dismiss();
+                                }
+                            });
+
+                            AlertDialog dialog = builder.create();
+                            dialog.show();
                             e.printStackTrace();
                         }
                     }

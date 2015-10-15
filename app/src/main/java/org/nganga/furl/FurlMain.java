@@ -1,12 +1,10 @@
 package org.nganga.furl;
 
 import android.app.ProgressDialog;
-import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
-import android.location.Location;
-import android.location.LocationListener;
-import android.location.LocationManager;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,10 +21,10 @@ import com.crashlytics.android.answers.CustomEvent;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseGeoPoint;
+import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
-
-import org.nganga.furl.utils.Utils;
+import com.parse.SaveCallback;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -110,8 +108,10 @@ public class FurlMain extends AppCompatActivity {
 
             ParseGeoPoint userLocation = new ParseGeoPoint(latitude, longitude);
 
-            currentUser.put("location", userLocation);
-            currentUser.saveEventually();
+            ParseObject locationobject = new ParseObject("Location");
+            locationobject.put("username", currentUser.getUsername());
+            locationobject.put("Location", userLocation);
+            locationobject.saveInBackground();
         } else {
             gps.showSettingsAlert();
         }
@@ -173,10 +173,19 @@ public class FurlMain extends AppCompatActivity {
                         }
                     });
                 } else {
-                    Utils.showDialog(
-                            getApplicationContext(),
-                            getString(R.string.err_users) + " "
-                                    + e.getMessage());
+                    AlertDialog.Builder builder = new AlertDialog.Builder(FurlMain.this);
+                    builder.setMessage(e.getMessage());
+                    builder.setTitle("Sorry Mate");
+                    builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            //to close the dialog
+                            dialogInterface.dismiss();
+                        }
+                    });
+
+                    AlertDialog  dialog = builder.create();
+                    dialog.show();
                     e.printStackTrace();
                 }
             }

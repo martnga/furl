@@ -1,8 +1,10 @@
 package org.nganga.furl.activity;
 
 import android.app.Activity;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -11,26 +13,21 @@ import com.crashlytics.android.Crashlytics;
 import com.crashlytics.android.answers.Answers;
 import com.crashlytics.android.answers.CustomEvent;
 import com.digits.sdk.android.AuthCallback;
+import com.digits.sdk.android.Digits;
 import com.digits.sdk.android.DigitsAuthButton;
 import com.digits.sdk.android.DigitsException;
 import com.digits.sdk.android.DigitsSession;
 import com.parse.ParseException;
-import com.parse.ParseObject;
 import com.parse.ParseUser;
-import com.parse.SaveCallback;
 import com.parse.SignUpCallback;
-import com.twitter.sdk.android.core.Callback;
-import com.twitter.sdk.android.core.Result;
-import com.twitter.sdk.android.core.TwitterException;
-import com.twitter.sdk.android.core.TwitterSession;
 import com.twitter.sdk.android.core.identity.TwitterLoginButton;
 
 import org.nganga.furl.AccountSettings;
 import org.nganga.furl.FurlMain;
 import org.nganga.furl.R;
 import org.nganga.furl.SessionRecorder;
-import org.nganga.furl.custom.CustomActivity;
-import org.nganga.furl.utils.Utils;
+
+import java.util.Random;
 
 public class Login extends Activity {
 
@@ -78,10 +75,15 @@ public class Login extends Activity {
         phoneButton.setCallback(new AuthCallback() {
             @Override
             public void success(DigitsSession digitsSession, String phoneNumber) {
+                Random rand = new Random();
+
+                int  n = rand.nextInt(1*1000000000) + 1;
+
                 SessionRecorder.recordSessionActive("Login: digits account active", digitsSession);
                 Answers.getInstance().logCustom(new CustomEvent("login:digits:success"));
                 final ParseUser pu = new ParseUser();
                 pu.put("phoneNumber", phoneNumber);
+                pu.setUsername("Furl" + n);
                 pu.put("installed", true);
                 pu.signUpInBackground(new SignUpCallback() {
 
@@ -93,10 +95,21 @@ public class Login extends Activity {
                             startApp();
                             finish();
                         } else {
-                            Utils.showDialog(
-                                    getApplicationContext(),
-                                    getString(R.string.err_signup) + " "
-                                            + e.getMessage());
+
+                            AlertDialog.Builder builder = new AlertDialog.Builder(Login.this);
+                            builder.setMessage(e.getMessage());
+                            builder.setTitle("Sorry Mate");
+                            builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    //to close the dialog
+                                    deleteSession();
+                                    dialogInterface.dismiss();
+                                }
+                            });
+
+                            AlertDialog  dialog = builder.create();
+                            dialog.show();
                             e.printStackTrace();
                         }
                     }
@@ -118,7 +131,7 @@ public class Login extends Activity {
     private void setUpSkip() {
         TextView skipButton;
         skipButton = (TextView) findViewById(R.id.skip);
-        skipButton.setOnClickListener(new View.OnClickListener() {
+        /*skipButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Crashlytics.log("Login: skipped login");
@@ -126,7 +139,7 @@ public class Login extends Activity {
                 startApp();
                 overridePendingTransition(R.anim.slide_down, R.anim.slide_up);
             }
-        });
+        });*/
     }
 
     @Override
@@ -137,10 +150,19 @@ public class Login extends Activity {
 
     private void startApp() {
 
-
-
     final Intent intent = new Intent(Login.this,
                 AccountSettings.class);
         startActivity(intent);
     }
+
+    public void deleteSession(){
+
+        Digits.getSessionManager().clearActiveSession();
+
+        final Intent intent = new Intent(Login.this,
+                InitialActivity.class);
+        startActivity(intent);
+
+    }
+
 }

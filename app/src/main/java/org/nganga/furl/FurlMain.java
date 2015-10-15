@@ -48,6 +48,7 @@ public class FurlMain extends AppCompatActivity {
         setContentView(R.layout.furl);
         setUpViews();
         setUpLocation();
+        loadUserList();
     }
 
     private void setUpViews() {

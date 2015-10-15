@@ -8,4 +8,5 @@ public class Const
 
 	/** The Constant EXTRA_DATA. */
 	public static final String EXTRA_DATA = "extraData";
+	public static final String USER_PHOTO = "userPhoto";
 }

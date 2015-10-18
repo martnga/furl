@@ -78,7 +78,7 @@
           <com.makeramen.roundedimageview.RoundedImageView
               xmlns:app="http://schemas.android.com/apk/res-auto"
               android:layout_below="@+id/hiTxt"
-              android:id="@+id/profilePhoto"
+              android:id="@+id/profile_photo"
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
               android:layout_centerHorizontal="true"
@@ -87,7 +87,7 @@
               android:layout_marginTop="@dimen/top_bar_left_side_button_margin_start"
               android:layout_marginBottom="@dimen/below_profile_photo"
               android:scaleType="fitCenter"
-              app:riv_corner_radius="20dip"
+              app:riv_corner_radius="40dip"
               app:riv_mutate_background="true"
               app:riv_tile_mode="repeat"
               app:riv_oval="true" />

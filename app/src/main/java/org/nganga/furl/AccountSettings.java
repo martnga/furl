@@ -95,7 +95,7 @@ public class AccountSettings extends Activity {
 
                 AlertDialog.Builder builder = new AlertDialog.Builder(AccountSettings.this);
                 builder.setMessage(R.string.confirm_delete);
-                builder.setTitle("Confirm Delete Account");
+                builder.setTitle("Confirm Account DEACTIVATION");
                 builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
@@ -106,6 +106,17 @@ public class AccountSettings extends Activity {
                         dialogInterface.dismiss();
                     }
                 });
+
+
+                 builder.setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+
+                        //to close the dialog
+                        dialogInterface.dismiss();
+                    }
+                });
+
 
                 AlertDialog  dialog = builder.create();
                 dialog.show();
@@ -207,7 +218,7 @@ public class AccountSettings extends Activity {
 
 
     private void selectImage() {
-        final CharSequence[] items = {"Take Photo", "Choose from Library", "Cancel"};
+        final CharSequence[] items = {"Take Photo", "Choose from Gallery", "Cancel"};
 
         AlertDialog.Builder builder = new AlertDialog.Builder(AccountSettings.this);
         builder.setTitle("Add Photo!");

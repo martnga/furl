@@ -132,7 +132,7 @@ public class Strangers extends Activity{
                     AlertDialog.Builder builder = new AlertDialog.Builder(Strangers.this);
                     builder.setMessage(e.getMessage());
                     builder.setTitle("Sorry Mate");
-                    builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+                    builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
                             //to close the dialog

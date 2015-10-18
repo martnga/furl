@@ -51,12 +51,13 @@
 <ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="0dp"
+    android:layout_weight="1"
     >
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                  xmlns:fab="http://schemas.android.com/apk/res-auto"
                   android:layout_width="match_parent"
+                  xmlns:fab="http://schemas.android.com/apk/res-auto"
                   android:layout_height="match_parent"
                   android:orientation="vertical">
 
@@ -82,8 +83,9 @@
             fab:fab_colorRipple="@color/active_button"/>
 
 
-
     </LinearLayout>
 </ScrollView>
+
+
 
 </LinearLayout>

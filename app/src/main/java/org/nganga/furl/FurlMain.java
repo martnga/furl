@@ -24,6 +24,8 @@ import com.parse.ParseGeoPoint;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
 
+import org.nganga.furl.utils.Const;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -164,10 +166,10 @@ public class FurlMain extends AppCompatActivity {
                                                 View arg1, int pos, long arg3) {
 
                             // This is starts specific chat
-                            /*startActivity(new Intent(UserList.this,
+                            startActivity(new Intent(getApplicationContext(),
                                     Chat.class).putExtra(
                                     Const.EXTRA_DATA, uList.get(pos)
-                                            .getUsername()));*/
+                                            .getUsername()));
                         }
                     });
                 } else {
@@ -237,7 +239,7 @@ public class FurlMain extends AppCompatActivity {
             TextView lbl = (TextView) v;
             lbl.setText(c.getUsername());
             lbl.setCompoundDrawablesWithIntrinsicBounds(
-                   R.drawable.furl_32, 0, R.drawable.close, 0);
+                   R.drawable.user, 0, R.drawable.close, 0);
 
             return v;
         }

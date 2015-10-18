@@ -109,7 +109,7 @@ public class Chat extends CustomActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        Crashlytics.log("Conversations: getting back to FriendsList");
+        Crashlytics.log("Conversations: getting back to FurlMain");
         finish();
             final Intent intent = new Intent(getApplicationContext(), Strangers.class);
             startActivity(intent);
@@ -176,7 +176,7 @@ public class Chat extends CustomActivity {
         ParseObject po = new ParseObject("Chat");
         po.put("sender", Strangers.user.getUsername());
         po.put("receiver", buddy);
-        // po.put("createdAt", "");
+        po.put("createdAt", "");
         po.put("message", s);
         po.saveEventually(new SaveCallback() {
 

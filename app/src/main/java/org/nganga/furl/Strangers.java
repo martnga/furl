@@ -18,6 +18,8 @@ import android.widget.Toast;
 
 import com.parse.FindCallback;
 import com.parse.ParseException;
+import com.parse.ParseGeoPoint;
+import com.parse.ParseQuery;
 import com.parse.ParseUser;
 
 import org.nganga.furl.utils.Const;
@@ -34,7 +36,7 @@ public class Strangers extends Activity{
     private ArrayList<ParseUser> uList;
 
     /** The user. */
-    public static ParseUser user;
+    public static ParseUser user = ParseUser.getCurrentUser();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -96,50 +98,54 @@ public class Strangers extends Activity{
     {
         final ProgressDialog dia = ProgressDialog.show(this, null,
                 getString(R.string.alert_loading));
-        ParseUser.getQuery().whereNotEqualTo("username", user.getUsername())
-                .findInBackground(new FindCallback<ParseUser>() {
+        ParseGeoPoint userLocation = (ParseGeoPoint) user.get("location");
+        ParseQuery<ParseUser> query = ParseUser.getQuery();
+        query.whereNotEqualTo("username", user.getUsername());
+        query.whereNear("location", userLocation);
+        query.setLimit(25);
+        query.findInBackground(new FindCallback<ParseUser>() {
 
-                    @Override
-                    public void done(List<ParseUser> li, ParseException e) {
-                        dia.dismiss();
-                        if (li != null) {
-                            if (li.size() == 0)
-                                Toast.makeText(Strangers.this,
-                                        R.string.msg_no_user_found,
-                                        Toast.LENGTH_SHORT).show();
+            @Override
+            public void done(List<ParseUser> li, ParseException e) {
+                dia.dismiss();
+                if (li != null) {
+                    if (li.size() == 0)
+                        Toast.makeText(Strangers.this,
+                                R.string.msg_no_user_found,
+                                Toast.LENGTH_SHORT).show();
 
-                            uList = new ArrayList<ParseUser>(li);
-                            ListView list = (ListView) findViewById(R.id.friends_list);
-                            list.setAdapter(new UserAdapter());
-                            list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    uList = new ArrayList<ParseUser>(li);
+                    ListView list = (ListView) findViewById(R.id.friends_list);
+                    list.setAdapter(new UserAdapter());
+                    list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
-                                @Override
-                                public void onItemClick(AdapterView<?> arg0,
-                                                        View arg1, int pos, long arg3) {
-                                    startActivity(new Intent(Strangers.this,
+                        @Override
+                        public void onItemClick(AdapterView<?> arg0,
+                                                View arg1, int pos, long arg3) {
+                                    /*startActivity(new Intent(Strangers.this,
                                             Chat.class).putExtra(
                                             Const.EXTRA_DATA, uList.get(pos)
-                                                    .getUsername()));
-                                }
-                            });
-                        } else {
-                            AlertDialog.Builder builder = new AlertDialog.Builder(Strangers.this);
-                            builder.setMessage(e.getMessage());
-                            builder.setTitle("Sorry Mate");
-                            builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialogInterface, int i) {
-                                    //to close the dialog
-                                    dialogInterface.dismiss();
-                                }
-                            });
-
-                            AlertDialog dialog = builder.create();
-                            dialog.show();
-                            e.printStackTrace();
+                                                    .getUsername()));*/
                         }
-                    }
-                });
+                    });
+                } else {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(Strangers.this);
+                    builder.setMessage(e.getMessage());
+                    builder.setTitle("Sorry Mate");
+                    builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            //to close the dialog
+                            dialogInterface.dismiss();
+                        }
+                    });
+
+                    AlertDialog dialog = builder.create();
+                    dialog.show();
+                    e.printStackTrace();
+                }
+            }
+        });
     }
 
     /**
@@ -189,8 +195,7 @@ public class Strangers extends Activity{
             TextView lbl = (TextView) v;
             lbl.setText(c.getUsername());
             lbl.setCompoundDrawablesWithIntrinsicBounds(
-                    c.getBoolean("online") ? R.drawable.close
-                            : R.drawable.far, 0, R.drawable.furl_24, 0);
+                    R.drawable.user, 0, R.drawable.checked_user, 0);
 
             return v;
         }

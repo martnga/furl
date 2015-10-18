@@ -42,6 +42,7 @@ dependencies {
     compile 'com.parse.bolts:bolts-android:1.+'
     compile fileTree(dir: 'libs', include: 'Parse-*.jar')
     compile 'com.makeramen:roundedimageview:2.2.0'
+    compile 'com.github.clans:fab:1.6.1'
     compile('com.digits.sdk.android:digits:1.8.0@aar') {
         transitive = true;
     }

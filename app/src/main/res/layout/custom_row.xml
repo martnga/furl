@@ -14,7 +14,7 @@
         android:id="@+id/listIcon"
         android:layout_centerVertical="true"
         android:layout_gravity="center_vertical"
-        android:src="@drawable/moon"/>
+        android:src="@drawable/ic_send"/>
 
     <TextView
         android:layout_width="wrap_content"

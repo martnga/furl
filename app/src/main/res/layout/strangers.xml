@@ -21,11 +21,11 @@
             android:layout_marginStart="@dimen/top_bar_left_side_button_margin_start"
             android:contentDescription="@string/content_desc_back"
             android:src="@drawable/ic_back"
-            android:tint="@color/green" />
+            android:tint="@color/primary" />
 
         <org.nganga.furl.view.AvenirTextView
-            android:id="@+id/countdown_count"
-            android:layout_width="@dimen/countdown_text_width"
+            android:id="@+id/stranger_text"
+            android:layout_width="wrap_content"
             android:layout_height="@dimen/countdown_text_height"
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
@@ -35,15 +35,15 @@
             android:paddingLeft="@dimen/countdown_text_padding_start"
             android:paddingStart="@dimen/countdown_text_padding_start"
             android:paddingTop="@dimen/countdown_text_padding_top"
-            android:text="@string/seconds_to_go"
+            android:text="@string/furls"
             android:textAppearance="?android:attr/textAppearanceSmall"
-            android:textColor="@color/green"
+            android:textColor="@color/primary"
             android:textSize="@dimen/countdown_text_size" />
 
 
 
         <ImageView
-            android:id="@+id/tick"
+            android:id="@+id/requests_icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
@@ -52,10 +52,11 @@
             android:layout_marginRight="@dimen/top_bar_right_side_button_margin_end"
             android:layout_marginEnd="@dimen/top_bar_right_side_button_margin_end"
             android:contentDescription="@string/content_desc_done"
-            android:src="@drawable/ic_tick"
-            android:tint="@color/grayish_blue" />
+            android:src="@drawable/ic_group_add_white_24dp"
+            android:tint="@color/primary" />
 
     </RelativeLayout>
+
 
     <ListView
         android:id="@+id/friends_list"

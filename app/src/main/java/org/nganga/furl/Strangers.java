@@ -76,7 +76,7 @@ public class Strangers extends Activity{
 
     private void setUpRequests() {
         // go back if clicked
-        final ImageView backButton = (ImageView) findViewById(R.id.tick);
+        final ImageView backButton = (ImageView) findViewById(R.id.requests_icon);
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

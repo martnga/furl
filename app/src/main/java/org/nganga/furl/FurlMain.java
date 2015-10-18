@@ -43,7 +43,7 @@ public class FurlMain extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.furl);
+        setContentView(R.layout.furl_main);
         setUpViews();
         setUpLocation();
         loadUserList();
@@ -56,7 +56,7 @@ public class FurlMain extends AppCompatActivity {
     }
 
     private void FetchContacts() {
-        final ImageView icon = (ImageView) findViewById(R.id.cannonball_logo);
+        final ImageView icon = (ImageView) findViewById(R.id.contacts_icon);
         icon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -69,7 +69,7 @@ public class FurlMain extends AppCompatActivity {
     }
 
     private void setStrangers() {
-        final ImageView popular = (ImageView) findViewById(R.id.popular);
+        final ImageView popular = (ImageView) findViewById(R.id.strangers_icon);
         popular.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -82,7 +82,7 @@ public class FurlMain extends AppCompatActivity {
     }
 
     private void setAccountSettings() {
-        final ImageView history = (ImageView) findViewById(R.id.history);
+        final ImageView history = (ImageView) findViewById(R.id.settings_icon);
         history.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -237,8 +237,7 @@ public class FurlMain extends AppCompatActivity {
             TextView lbl = (TextView) v;
             lbl.setText(c.getUsername());
             lbl.setCompoundDrawablesWithIntrinsicBounds(
-                   R.drawable.furl_32, 0,  c.getBoolean("online") ? R.drawable.far
-                            : R.drawable.close, 0);
+                   R.drawable.furl_32, 0, R.drawable.close, 0);
 
             return v;
         }

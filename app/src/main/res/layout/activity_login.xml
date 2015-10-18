@@ -27,7 +27,7 @@
         android:layout_height="wrap_content"
         android:layout_weight="5">
 
-       <!-- <org.nganga.furl.view.FurlTwitterLoginButton
+       <!-- <org.nganga.furl_main.view.FurlTwitterLoginButton
             android:id="@+id/twitter_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

@@ -57,6 +57,8 @@
     <string name="popular">popular</string>
     <string name="confirm_delete">Do You Really Have To Go? </string>
     <string name="furl_requests">Furl Requests</string>
+    <string name="furls">Furls</string>
+    <string name="contacts">Contacts</string>
 
 
 </resources>

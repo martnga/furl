@@ -2,8 +2,8 @@
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:orientation="vertical">
+              android:orientation="vertical"
+              android:layout_height="match_parent">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -16,7 +16,7 @@
             android:layout_margin="@dimen/top_bar_left_side_button_margin_start"
             android:contentDescription="@string/content_desc_back"
             android:src="@drawable/ic_back"
-            android:tint="@color/green" />
+            android:tint="@color/primary" />
 
         <org.nganga.furl.view.AvenirTextView
             android:id="@+id/requestHeadingText"
@@ -24,12 +24,26 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_centerHorizontal="true"
+            android:textAppearance="?android:attr/textAppearanceSmall"
             android:text="@string/furl_requests"
-            android:textColor="@color/green"
+            android:textColor="@color/primary"
             android:textSize="@dimen/top_bar_text_size"
             />
 
     </RelativeLayout>
+
+
+    <ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
+
 
 
     <ListView
@@ -43,3 +57,7 @@
 
 
 </LinearLayout>
+
+ </ScrollView>
+
+    </LinearLayout>

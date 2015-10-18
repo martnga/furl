@@ -46,7 +46,6 @@ public class Strangers extends Activity{
     }
 
     private void setUpViews() {
-        setUpCount();
         setUpBack();
         setUpRequests();
 
@@ -63,23 +62,14 @@ public class Strangers extends Activity{
         });
     }
 
-    private void setUpCount() {
-        // go back if clicked
-        final ImageView backButton = (ImageView) findViewById(R.id.back);
-        backButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
-    }
-
     private void setUpRequests() {
         // go back if clicked
         final ImageView backButton = (ImageView) findViewById(R.id.requests_icon);
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), Requests.class);
+                startActivity(intent);
 
             }
         });

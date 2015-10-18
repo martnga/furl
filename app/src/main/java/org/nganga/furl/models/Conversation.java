@@ -2,7 +2,7 @@ package org.nganga.furl.models;
 
 import java.util.Date;
 
-import org.nganga.furl.Friends;
+import org.nganga.furl.Strangers;
 
 /**
  * The Class Conversation is a Java Bean class that represents a single chat
@@ -83,7 +83,7 @@ public class Conversation
 	 */
 	public boolean isSent()
 	{
-		return Friends.user.getUsername().equals(sender);
+		return Strangers.user.getUsername().equals(sender);
 	}
 
 	/**

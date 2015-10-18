@@ -33,11 +33,11 @@ public class FurlDigitsAuthButton extends DigitsAuthButton {
             return;
         }
         final Drawable phone = getResources().getDrawable(R.drawable.ic_signin_phone);
-        phone.setColorFilter(getResources().getColor(R.color.green), PorterDuff.Mode.SRC_ATOP);
+        phone.setColorFilter(getResources().getColor(R.color.primary), PorterDuff.Mode.SRC_ATOP);
         setCompoundDrawablesWithIntrinsicBounds(phone, null, null, null);
         setBackgroundResource(R.drawable.digits_button);
         setTextSize(20);
-        setTextColor(getResources().getColor(R.color.green));
+        setTextColor(getResources().getColor(R.color.primary));
         setTypeface(MyApp.getInstance().getTypeface());
     }
 }

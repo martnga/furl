@@ -55,7 +55,7 @@
     <string name="delete_account">Delete Account</string>
     <string name="saveSettings">Save Settings</string>
     <string name="popular">popular</string>
-    <string name="confirm_delete">Do You Really Want To Go? </string>
+    <string name="confirm_delete">Do You Really Have To Go? </string>
     <string name="furl_requests">Furl Requests</string>
 
 

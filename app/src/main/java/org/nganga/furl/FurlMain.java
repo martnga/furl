@@ -21,20 +21,20 @@ import com.crashlytics.android.answers.CustomEvent;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseGeoPoint;
-import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
-import com.parse.SaveCallback;
 
 import java.util.ArrayList;
 import java.util.List;
 
 
+ /*This holds all the users furls*/
+
 public class FurlMain extends AppCompatActivity {
 
 
 
-    public static ParseUser currentUser;
+    final ParseUser currentUser = ParseUser.getCurrentUser();
 
     GPSTracker gps;
 
@@ -51,8 +51,8 @@ public class FurlMain extends AppCompatActivity {
 
     private void setUpViews() {
         FetchContacts();
-        setFriends();
-        setAccount();
+        setStrangers();
+        setAccountSettings();
     }
 
     private void FetchContacts() {
@@ -68,20 +68,20 @@ public class FurlMain extends AppCompatActivity {
         });
     }
 
-    private void setFriends() {
+    private void setStrangers() {
         final ImageView popular = (ImageView) findViewById(R.id.popular);
         popular.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Crashlytics.log("FurlMain: clicked friends button");
-                Answers.getInstance().logCustom(new CustomEvent("clicked friends"));
-                Intent intent = new Intent(getApplicationContext(), Friends.class);
+                Crashlytics.log("FurlMain: clicked strangers button");
+                Answers.getInstance().logCustom(new CustomEvent("clicked strangers"));
+                Intent intent = new Intent(getApplicationContext(), Strangers.class);
                 startActivity(intent);
             }
         });
     }
 
-    private void setAccount() {
+    private void setAccountSettings() {
         final ImageView history = (ImageView) findViewById(R.id.history);
         history.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -108,10 +108,8 @@ public class FurlMain extends AppCompatActivity {
 
             ParseGeoPoint userLocation = new ParseGeoPoint(latitude, longitude);
 
-            ParseObject locationobject = new ParseObject("Location");
-            locationobject.put("username", currentUser.getUsername());
-            locationobject.put("Location", userLocation);
-            locationobject.saveInBackground();
+            currentUser.put("location", userLocation);
+            currentUser.saveInBackground();
         } else {
             gps.showSettingsAlert();
         }

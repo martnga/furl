@@ -1,6 +1,5 @@
 package org.nganga.furl;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -13,12 +12,9 @@ import java.util.Date;
 import java.util.List;
 
 import android.content.Context;
-import android.os.Bundle;
 import android.os.Handler;
 import android.text.InputType;
 import android.text.format.DateUtils;
-import android.view.MenuItem;
-import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AbsListView;
@@ -115,7 +111,7 @@ public class Chat extends CustomActivity {
         super.onBackPressed();
         Crashlytics.log("Conversations: getting back to FriendsList");
         finish();
-            final Intent intent = new Intent(getApplicationContext(), Friends.class);
+            final Intent intent = new Intent(getApplicationContext(), Strangers.class);
             startActivity(intent);
 
     }
@@ -171,14 +167,14 @@ public class Chat extends CustomActivity {
 
         String s = txt.getText().toString();
         final Conversation c = new Conversation(s, new Date(),
-                Friends.user.getUsername());
+                Strangers.user.getUsername());
         c.setStatus(Conversation.STATUS_SENDING);
         convList.add(c);
         adp.notifyDataSetChanged();
         txt.setText(null);
 
         ParseObject po = new ParseObject("Chat");
-        po.put("sender", Friends.user.getUsername());
+        po.put("sender", Strangers.user.getUsername());
         po.put("receiver", buddy);
         // po.put("createdAt", "");
         po.put("message", s);
@@ -207,7 +203,7 @@ public class Chat extends CustomActivity {
             // load all messages...
             ArrayList<String> al = new ArrayList<String>();
             al.add(buddy);
-            al.add(Friends.user.getUsername());
+            al.add(Strangers.user.getUsername());
             q.whereContainedIn("sender", al);
             q.whereContainedIn("receiver", al);
         }
@@ -217,7 +213,7 @@ public class Chat extends CustomActivity {
             if (lastMsgDate != null)
                 q.whereGreaterThan("createdAt", lastMsgDate);
             q.whereEqualTo("sender", buddy);
-            q.whereEqualTo("receiver", Friends.user.getUsername());
+            q.whereEqualTo("receiver", Strangers.user.getUsername());
         }
         q.orderByDescending("createdAt");
         q.setLimit(30);

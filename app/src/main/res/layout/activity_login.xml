@@ -19,7 +19,7 @@
         android:contentDescription="@string/content_desc_icon"
         android:longClickable="true"
         android:scaleType="center"
-        android:src="@drawable/furl_48"
+        android:src="@drawable/furl_128"
         android:tint="@color/primary" />
 
     <RelativeLayout
@@ -47,7 +47,7 @@
             android:layout_alignParentEnd="true" />-->
 
         <org.nganga.furl.view.AvenirTextView
-            android:id="@+id/terms"
+            android:id="@+id/terms_txt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/skip"
@@ -59,7 +59,7 @@
             android:id="@+id/phone_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/terms"
+            android:layout_below="@+id/terms_txt"
             android:background="@drawable/sign_up_button"
             android:layout_marginTop="@dimen/login_button_margin_top"
             android:layout_marginBottom="@dimen/login_button_margin_bottom"
@@ -78,20 +78,4 @@
     </RelativeLayout>
 
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1">
-
-        <org.nganga.furl.view.AvenirTextView
-            android:id="@+id/skip"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/skip"
-            android:textColor="@color/green"
-            android:textSize="@dimen/borderless_button_text_size"
-            android:layout_centerVertical="true"
-            android:layout_centerHorizontal="true" />
-
-    </RelativeLayout>
 </LinearLayout>

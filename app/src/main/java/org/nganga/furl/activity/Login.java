@@ -31,7 +31,7 @@ import java.util.Random;
 
 public class Login extends Activity {
 
-    private TwitterLoginButton twitterButton;
+   // private TwitterLoginButton twitterButton;
     private DigitsAuthButton phoneButton;
 
     @Override
@@ -43,14 +43,12 @@ public class Login extends Activity {
     }
 
     private void setUpViews() {
-        setUpSkip();
-        setUpTwitterButton();
         setUpDigitsButton();
     }
 
-    private void setUpTwitterButton() {
+    /*private void setUpTwitterButton() {
         twitterButton = (TwitterLoginButton) findViewById(R.id.twitter_button);
-        /*twitterButton.setCallback(new Callback<TwitterSession>() {
+        twitterButton.setCallback(new Callback<TwitterSession>() {
             @Override
             public void success(Result<TwitterSession> result) {
                 SessionRecorder.recordSessionActive("Login: twitter account active", result.data);
@@ -66,8 +64,8 @@ public class Login extends Activity {
                         Toast.LENGTH_SHORT).show();
                 Crashlytics.logException(exception);
             }
-        });*/
-    }
+        });
+    }*/
 
     private void setUpDigitsButton() {
         phoneButton = (DigitsAuthButton) findViewById(R.id.phone_button);
@@ -77,21 +75,20 @@ public class Login extends Activity {
             public void success(DigitsSession digitsSession, String phoneNumber) {
                 Random rand = new Random();
 
-                int  n = rand.nextInt(1*1000000000) + 1;
+                int n = rand.nextInt(1 * 1000000000) + 1;
 
                 SessionRecorder.recordSessionActive("Login: digits account active", digitsSession);
                 Answers.getInstance().logCustom(new CustomEvent("login:digits:success"));
                 final ParseUser pu = new ParseUser();
                 pu.put("phoneNumber", phoneNumber);
                 pu.setUsername("Furl" + n);
+                pu.setPassword("12345");
                 pu.put("installed", true);
                 pu.signUpInBackground(new SignUpCallback() {
 
                     @Override
                     public void done(ParseException e) {
                         if (e == null) {
-                            FurlMain.currentUser = pu;
-                            AccountSettings.user = pu;
                             startApp();
                             finish();
                         } else {
@@ -108,7 +105,7 @@ public class Login extends Activity {
                                 }
                             });
 
-                            AlertDialog  dialog = builder.create();
+                            AlertDialog dialog = builder.create();
                             dialog.show();
                             e.printStackTrace();
                         }
@@ -128,10 +125,10 @@ public class Login extends Activity {
         });
     }
 
-    private void setUpSkip() {
+    /*private void setUpSkip() {
         TextView skipButton;
         skipButton = (TextView) findViewById(R.id.skip);
-        /*skipButton.setOnClickListener(new View.OnClickListener() {
+        skipButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Crashlytics.log("Login: skipped login");
@@ -139,14 +136,14 @@ public class Login extends Activity {
                 startApp();
                 overridePendingTransition(R.anim.slide_down, R.anim.slide_up);
             }
-        });*/
-    }
+        });
+    }*/
 
-    @Override
+    /*@Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         twitterButton.onActivityResult(requestCode, resultCode, data);
-    }
+    }*/
 
     private void startApp() {
 

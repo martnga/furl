@@ -26,7 +26,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class Friends extends Activity{
+public class Strangers extends Activity{
     RecyclerView strangers_list;
     StrangersRecyclerAdapter adapter;
 
@@ -39,7 +39,7 @@ public class Friends extends Activity{
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.friends);
+        setContentView(R.layout.strangers);
 
         setUpViews();
         loadUserList();
@@ -114,7 +114,7 @@ public class Friends extends Activity{
                         dia.dismiss();
                         if (li != null) {
                             if (li.size() == 0)
-                                Toast.makeText(Friends.this,
+                                Toast.makeText(Strangers.this,
                                         R.string.msg_no_user_found,
                                         Toast.LENGTH_SHORT).show();
 
@@ -126,14 +126,14 @@ public class Friends extends Activity{
                                 @Override
                                 public void onItemClick(AdapterView<?> arg0,
                                                         View arg1, int pos, long arg3) {
-                                    startActivity(new Intent(Friends.this,
+                                    startActivity(new Intent(Strangers.this,
                                             Chat.class).putExtra(
                                             Const.EXTRA_DATA, uList.get(pos)
                                                     .getUsername()));
                                 }
                             });
                         } else {
-                            AlertDialog.Builder builder = new AlertDialog.Builder(Friends.this);
+                            AlertDialog.Builder builder = new AlertDialog.Builder(Strangers.this);
                             builder.setMessage(e.getMessage());
                             builder.setTitle("Sorry Mate");
                             builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {

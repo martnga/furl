@@ -24,7 +24,7 @@ public class AccountSettings extends Activity {
 
     private Button logOutBtn;
     private Button saveSettingsBtn;
-    public static ParseUser user;
+    final ParseUser user = ParseUser.getCurrentUser();
     private TextInputLayout mUsernameLayout;
     private TextInputLayout mStatusLayout;
     private EditText mUsernameText;

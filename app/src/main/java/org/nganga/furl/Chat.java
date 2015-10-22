@@ -111,7 +111,7 @@ public class Chat extends CustomActivity {
         super.onBackPressed();
         Crashlytics.log("Conversations: getting back to FurlMain");
         finish();
-            final Intent intent = new Intent(getApplicationContext(), Strangers.class);
+            final Intent intent = new Intent(getApplicationContext(), FurlMain.class);
             startActivity(intent);
 
     }
@@ -167,14 +167,14 @@ public class Chat extends CustomActivity {
 
         String s = txt.getText().toString();
         final Conversation c = new Conversation(s, new Date(),
-                Strangers.user.getUsername());
+                FurlMain.currentUser.getUsername());
         c.setStatus(Conversation.STATUS_SENDING);
         convList.add(c);
         adp.notifyDataSetChanged();
         txt.setText(null);
 
         ParseObject po = new ParseObject("Chat");
-        po.put("sender", Strangers.user.getUsername());
+        po.put("sender", FurlMain.currentUser.getUsername());
         po.put("receiver", buddy);
         po.put("createdAt", "");
         po.put("message", s);
@@ -203,7 +203,7 @@ public class Chat extends CustomActivity {
             // load all messages...
             ArrayList<String> al = new ArrayList<String>();
             al.add(buddy);
-            al.add(Strangers.user.getUsername());
+            al.add(FurlMain.currentUser.getUsername());
             q.whereContainedIn("sender", al);
             q.whereContainedIn("receiver", al);
         }
@@ -213,7 +213,7 @@ public class Chat extends CustomActivity {
             if (lastMsgDate != null)
                 q.whereGreaterThan("createdAt", lastMsgDate);
             q.whereEqualTo("sender", buddy);
-            q.whereEqualTo("receiver", Strangers.user.getUsername());
+            q.whereEqualTo("receiver", FurlMain.currentUser.getUsername());
         }
         q.orderByDescending("createdAt");
         q.setLimit(30);

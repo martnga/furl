@@ -36,7 +36,7 @@ public class FurlMain extends AppCompatActivity {
 
 
 
-    final ParseUser currentUser = ParseUser.getCurrentUser();
+    public final static ParseUser currentUser = ParseUser.getCurrentUser();
 
     GPSTracker gps;
 
@@ -53,7 +53,7 @@ public class FurlMain extends AppCompatActivity {
 
     private void setUpViews() {
         FetchContacts();
-        setStrangers();
+       // setStrangers();
         setAccountSettings();
     }
 
@@ -70,7 +70,7 @@ public class FurlMain extends AppCompatActivity {
         });
     }
 
-    private void setStrangers() {
+   /* private void setStrangers() {
         final ImageView popular = (ImageView) findViewById(R.id.strangers_icon);
         popular.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -81,7 +81,7 @@ public class FurlMain extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-    }
+    }*/
 
     private void setAccountSettings() {
         final ImageView history = (ImageView) findViewById(R.id.settings_icon);
@@ -130,7 +130,7 @@ public class FurlMain extends AppCompatActivity {
     {
         super.onResume();
         loadUserList();
-
+        setUpLocation();
     }
 
 

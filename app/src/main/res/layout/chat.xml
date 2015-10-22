@@ -31,55 +31,78 @@
 
     </RelativeLayout>
 
-
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                  xmlns:tools="http://schemas.android.com/tools"
+    <LinearLayout
                   android:layout_width="match_parent"
                   android:layout_height="match_parent"
-                  android:orientation="vertical"
-                  android:background="@color/white">
+                  android:weightSum="2"
+                  android:orientation="vertical" >
 
-        <ListView
-            android:id="@+id/chat_list"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:fastScrollEnabled="true"
-            android:divider="@drawable/divider"
-            android:dividerHeight="@dimen/chat_list_divider_height" />
+        <LinearLayout android:layout_width="fill_parent"
+                      android:layout_height="wrap_content"
+                      android:layout_weight="1"
+                      android:background="@color/primary">
 
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            android:padding="@dimen/pad_5dp"
-            tools:context=".MainActivity" >
-
-
-            <EditText
-                android:id="@+id/txt"
-                style="@style/edittext_msg"
+            <com.makeramen.roundedimageview.RoundedImageView
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:layout_below="@+id/hiTxt"
+                android:id="@+id/profile_photo"
                 android:layout_width="wrap_content"
+                android:layout_margin="@dimen/top_bar_left_side_button_margin_start"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:backgroundTint="@color/primary"
-                android:hint="@string/type_msg" >
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:src="@drawable/ic_insert_photo_white_48dp"
+                android:layout_marginTop="@dimen/top_bar_left_side_button_margin_start"
+                android:layout_marginBottom="@dimen/below_profile_photo"
+                android:scaleType="fitCenter"
+                app:riv_corner_radius="40dip"
+                app:riv_mutate_background="true"
+                app:riv_tile_mode="repeat"
+                app:riv_oval="true" />
+        </LinearLayout>
+
+        <LinearLayout android:layout_width="fill_parent"
+                      android:layout_height="wrap_content"
+                      android:layout_weight="1"
+                      >
 
 
-            </EditText>
-
-            <Button
-                android:id="@+id/btnSend"
-                style="@style/btn"
+            <RelativeLayout
+                android:layout_marginTop="@dimen/button_margin_top"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/ic_send"
-                android:backgroundTint="@color/primary"/>
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/logOutBtn"
+                    android:textColor="@color/accent"
+                    android:background="@drawable/phone"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/settings_btn_margin"
+                    android:layout_marginStart="@dimen/settings_btn_margin"/>
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/saveSettingsBtn"
+                    android:textColor="@color/primary"
+                    android:background="@drawable/mail"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="@dimen/settings_btn_margin"
+                    android:layout_marginEnd="@dimen/settings_btn_margin"/>
+
+            </RelativeLayout>
 
         </LinearLayout>
+
+
+    </LinearLayout>
 
     </LinearLayout>
 
 
-</LinearLayout>

@@ -117,12 +117,16 @@
           android:layout_height="wrap_content"
           android:id="@+id/user_name_text_layout"
           android:layout_width="match_parent"
-          android:hint="Username">
+          >
 
           <EditText
               android:layout_width="match_parent"
               android:id="@+id/user_name_text"
               style="@style/edittext_msg"
+              android:textColorHint="@color/primary"
+              android:hint="Username"
+              android:layout_marginTop="@dimen/pad_5dp"
+              android:textSize="25sp"
               android:layout_height="wrap_content"
               android:layout_marginLeft="@dimen/top_bar_right_side_button_margin_end"
               android:layout_marginRight="@dimen/top_bar_right_side_button_margin_end"/>
@@ -135,12 +139,16 @@
           android:layout_height="wrap_content"
           android:layout_width="match_parent"
           android:id="@+id/status_text_layout"
-          android:hint="I Feel Like">
+          >
 
           <EditText
               android:layout_width="match_parent"
+              android:layout_marginTop="@dimen/pad_5dp"
               android:layout_height="wrap_content"
               style="@style/edittext_msg"
+              android:textColorHint="@color/primary"
+              android:hint="email"
+              android:textSize="25sp"
               android:id="@+id/status_text"
               android:layout_marginLeft="@dimen/top_bar_right_side_button_margin_end"
               android:layout_marginRight="@dimen/top_bar_right_side_button_margin_end"/>

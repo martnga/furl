@@ -105,10 +105,10 @@ public class Chat extends CustomActivity {
     public void onClick(View v)
     {
         super.onClick(v);
-        if (v.getId() == R.id.btnSend)
+       /* if (v.getId() == R.id.btnSend)
         {
            // sendMessage();
-        }
+        }*/
 
     }
 

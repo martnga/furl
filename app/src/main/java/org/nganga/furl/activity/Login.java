@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -33,6 +34,7 @@ public class Login extends Activity {
 
    // private TwitterLoginButton twitterButton;
     private DigitsAuthButton phoneButton;
+    private CheckBox termsCheck;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,9 +45,21 @@ public class Login extends Activity {
     }
 
     private void setUpViews() {
-        setUpDigitsButton();
+        setUpTermsCheck();
     }
 
+    private void setUpTermsCheck(){
+
+        termsCheck =(CheckBox)findViewById(R.id.terms_check);
+        if (termsCheck.isChecked())  {
+
+            setUpDigitsButton();
+        }
+        else {
+
+            Toast.makeText(getApplicationContext(), "Agree To Terms And Conditions To Proceed.", Toast.LENGTH_SHORT).show();
+        }
+    }
     /*private void setUpTwitterButton() {
         twitterButton = (TwitterLoginButton) findViewById(R.id.twitter_button);
         twitterButton.setCallback(new Callback<TwitterSession>() {

@@ -1,11 +1,12 @@
 package org.nganga.furl;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -15,9 +16,6 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.crashlytics.android.Crashlytics;
-import com.crashlytics.android.answers.Answers;
-import com.crashlytics.android.answers.CustomEvent;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseGeoPoint;
@@ -30,119 +28,79 @@ import java.util.ArrayList;
 import java.util.List;
 
 
- /*This holds all the users furls*/
-
-public class FurlMain extends AppCompatActivity {
-
-
-
-    public final static ParseUser currentUser = ParseUser.getCurrentUser();
-
-    GPSTracker gps;
+public class Strangers extends Activity{
+    RecyclerView strangers_list;
+    StrangersRecyclerAdapter adapter;
 
     /** The Chat list. */
     private ArrayList<ParseUser> uList;
+
+    /** The user. */
+    public static ParseUser user = ParseUser.getCurrentUser();
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.furl_main);
+        setContentView(R.layout.strangers);
+
         setUpViews();
-        setUpLocation();
         loadUserList();
     }
 
     private void setUpViews() {
-        FetchContacts();
-       // setStrangers();
-        setAccountSettings();
+        setUpBack();
+        setUpRequests();
+
     }
 
-    private void FetchContacts() {
-        final ImageView icon = (ImageView) findViewById(R.id.contacts_icon);
-        icon.setOnClickListener(new View.OnClickListener() {
+    private void setUpBack() {
+        // go back if clicked
+        final ImageView backButton = (ImageView) findViewById(R.id.back);
+        backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Crashlytics.log("FurlMain: clicked Contacts button");
-                Answers.getInstance().logCustom(new CustomEvent("clicked contacts"));
-                final Intent intent = new Intent(getApplicationContext(), ContactsMining.class);
-                startActivity(intent);
+                onBackPressed();
             }
         });
     }
 
-   /* private void setStrangers() {
-        final ImageView popular = (ImageView) findViewById(R.id.strangers_icon);
-        popular.setOnClickListener(new View.OnClickListener() {
+    private void setUpRequests() {
+        // go back if clicked
+        final ImageView backButton = (ImageView) findViewById(R.id.requests_icon);
+        backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Crashlytics.log("FurlMain: clicked strangers button");
-                Answers.getInstance().logCustom(new CustomEvent("clicked strangers"));
-                Intent intent = new Intent(getApplicationContext(), Strangers.class);
+                Intent intent = new Intent(getApplicationContext(), Requests.class);
                 startActivity(intent);
-            }
-        });
-    }*/
 
-    private void setAccountSettings() {
-        final ImageView history = (ImageView) findViewById(R.id.settings_icon);
-        history.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Crashlytics.log("FurlMain: clicked settings button");
-                Answers.getInstance().logCustom(new CustomEvent("clicked AccountSettings"));
-                final Intent intent = new Intent(getApplicationContext(),
-                        AccountSettings.class);
-                startActivity(intent);
             }
         });
     }
-
-
-
-
-    public void setUpLocation() {
-
-        gps = new GPSTracker(FurlMain.this);
-
-        if(gps.canGetLocation()) {
-            double latitude = gps.getLatitude();
-            double longitude = gps.getLongitude();
-
-            ParseGeoPoint userLocation = new ParseGeoPoint(latitude, longitude);
-
-            currentUser.put("location", userLocation);
-            currentUser.saveInBackground();
-        } else {
-            gps.showSettingsAlert();
-        }
-    }
-
-
-
 
 
 
     /* (non-Javadoc)
-	 * @see android.support.v4.app.FragmentActivity#onResume()
-	 */
+     * @see android.support.v4.app.FragmentActivity#onResume()
+     */
     @Override
     protected void onResume()
     {
         super.onResume();
         loadUserList();
-        setUpLocation();
+
     }
 
 
     /**
      * Load list of users.
      */
-    private void loadUserList() {
+    private void loadUserList()
+    {
         final ProgressDialog dia = ProgressDialog.show(this, null,
                 getString(R.string.alert_loading));
-        ParseGeoPoint userLocation = (ParseGeoPoint) currentUser.get("location");
+        ParseGeoPoint userLocation = (ParseGeoPoint) user.get("location");
         ParseQuery<ParseUser> query = ParseUser.getQuery();
-        query.whereNotEqualTo("username", currentUser.getUsername());
+        query.whereNotEqualTo("username", user.getUsername());
         query.whereNear("location", userLocation);
         query.setLimit(25);
         query.findInBackground(new FindCallback<ParseUser>() {
@@ -152,31 +110,29 @@ public class FurlMain extends AppCompatActivity {
                 dia.dismiss();
                 if (li != null) {
                     if (li.size() == 0)
-                        Toast.makeText(getApplicationContext(),
+                        Toast.makeText(Strangers.this,
                                 R.string.msg_no_user_found,
                                 Toast.LENGTH_SHORT).show();
 
                     uList = new ArrayList<ParseUser>(li);
-                    ListView list = (ListView) findViewById(R.id.furls_list);
+                    ListView list = (ListView) findViewById(R.id.friends_list);
                     list.setAdapter(new UserAdapter());
                     list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
                         @Override
                         public void onItemClick(AdapterView<?> arg0,
                                                 View arg1, int pos, long arg3) {
-
-                            // This starts specific chat
-                            startActivity(new Intent(getApplicationContext(),
-                                    Chat.class).putExtra(
-                                    Const.EXTRA_DATA, uList.get(pos)
-                                            .getUsername()));
+                                    /*startActivity(new Intent(Strangers.this,
+                                            Chat.class).putExtra(
+                                            Const.EXTRA_DATA, uList.get(pos)
+                                                    .getUsername()));*/
                         }
                     });
                 } else {
-                    AlertDialog.Builder builder = new AlertDialog.Builder(FurlMain.this);
+                    AlertDialog.Builder builder = new AlertDialog.Builder(Strangers.this);
                     builder.setMessage(e.getMessage());
                     builder.setTitle("Sorry Mate");
-                    builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
                             //to close the dialog
@@ -184,7 +140,7 @@ public class FurlMain extends AppCompatActivity {
                         }
                     });
 
-                    AlertDialog  dialog = builder.create();
+                    AlertDialog dialog = builder.create();
                     dialog.show();
                     e.printStackTrace();
                 }
@@ -239,7 +195,7 @@ public class FurlMain extends AppCompatActivity {
             TextView lbl = (TextView) v;
             lbl.setText(c.getUsername());
             lbl.setCompoundDrawablesWithIntrinsicBounds(
-                   R.drawable.user, 0, R.drawable.close, 0);
+                    R.drawable.user, 0, R.drawable.checked_user, 0);
 
             return v;
         }
@@ -248,3 +204,4 @@ public class FurlMain extends AppCompatActivity {
 
 
 }
+

@@ -23,7 +23,7 @@
             android:tint="@color/primary" />
 
         <org.nganga.furl.view.AvenirTextView
-            android:id="@+id/countdown_count"
+            android:id="@+id/contact_name"
             android:layout_width="wrap_content"
             android:layout_height="@dimen/countdown_text_height"
             android:layout_centerHorizontal="true"
@@ -45,11 +45,15 @@
 
     </RelativeLayout>
 
-    <ListView
-        android:id="@+id/contact_list"
+
+
+    <fragment
+        android:id="@+id/map"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:divider="@null"/>
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:name="com.google.android.gms.maps.MapFragment"
+        />
 
 
 </LinearLayout>

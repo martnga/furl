@@ -60,6 +60,7 @@
     <string name="furls">Furls</string>
     <string name="contacts">Contacts</string>
     <string name="term.ke">furl.terms.ke</string>
+    <string name="send_invitation">Send Invitation</string>
 
 
 </resources>

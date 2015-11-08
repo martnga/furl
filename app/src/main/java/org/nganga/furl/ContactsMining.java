@@ -2,14 +2,23 @@ package org.nganga.furl;
 
 
 import android.app.ListActivity;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.support.v4.widget.SimpleCursorAdapter;
+import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ListView;
+
+import com.parse.FindCallback;
+import com.parse.ParseException;
+import com.parse.ParseQuery;
+import com.parse.ParseUser;
+
+import java.util.List;
 
 
 /**
@@ -46,14 +55,54 @@ public class ContactsMining extends ListActivity  {
         Cursor cursor = ((SimpleCursorAdapter)l.getAdapter()).getCursor();
         cursor.moveToPosition(position);
 
-        String phone_number = cursor.getString(cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone._ID));
+       final String phone_number = cursor.getString(cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone._ID));
 
-        Intent bucket = new Intent(this, Map.class);
+        ParseQuery<ParseUser> query = ParseUser.getQuery();
+        query.whereEqualTo("phoneNumber", phone_number);
+        query.findInBackground(new FindCallback<ParseUser>() {
+            public void done(List<ParseUser> objects, ParseException e) {
+                if (e == null) {
+                    // The query was successful.
+                    Intent bucket = new Intent(ContactsMining.this, Map.class);
 
-        Bundle b = new Bundle();
-        b.putString("phonenumber", phone_number);
-        bucket.putExtras(b);
-        startActivity(bucket);
+                    Bundle b = new Bundle();
+                    b.putString("phonenumber", phone_number);
+                    bucket.putExtras(b);
+                    startActivity(bucket);
+                } else {
+                    // Something went wrong.
+
+                    AlertDialog.Builder builder = new AlertDialog.Builder(ContactsMining.this);
+                    builder.setMessage("Invite " + phone_number + " to Furl." );
+                    builder.setTitle(R.string.send_invitation);
+                    builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+
+
+                            //to close the dialog
+                            dialogInterface.dismiss();
+                        }
+                    });
+
+
+                    builder.setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+
+                            //to close the dialog
+                            dialogInterface.dismiss();
+                        }
+                    });
+
+
+                    AlertDialog  dialog = builder.create();
+                    dialog.show();
+                }
+            }
+        });
+
+
 
     }
 

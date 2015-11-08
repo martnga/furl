@@ -14,18 +14,6 @@
         android:src="@drawable/user" />
 
 
-    <TextView
-        android:id="@+id/phone_name"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_above="@id/phone_number"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentTop="true"
-        android:layout_alignWithParentIfMissing="true"
-        android:layout_toRightOf="@id/icon"
-        android:gravity="center_vertical"
-        android:text="Example application"
-        android:textSize="@dimen/countdown_text_size" />
 
     <TextView
         android:id="@+id/phone_number"
@@ -38,6 +26,19 @@
         android:singleLine="true"
         android:text="Description"
         android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/phone_name"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/phone_number"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignWithParentIfMissing="true"
+        android:layout_toRightOf="@id/icon"
+        android:gravity="center_vertical"
+        android:text="Example application"
+        android:textSize="@dimen/countdown_text_size" />
 
 
 </RelativeLayout> 

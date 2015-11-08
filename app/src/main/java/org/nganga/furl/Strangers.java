@@ -6,7 +6,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -29,8 +28,6 @@ import java.util.List;
 
 
 public class Strangers extends Activity{
-    RecyclerView strangers_list;
-    StrangersRecyclerAdapter adapter;
 
     /** The Chat list. */
     private ArrayList<ParseUser> uList;

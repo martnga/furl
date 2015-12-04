@@ -1,4 +1,4 @@
-package org.nganga.furl;
+package org.nganga.furl.userInfo;
 
 
 import android.app.ListActivity;
@@ -18,13 +18,15 @@ import com.parse.ParseException;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
 
+import org.nganga.furl.R;
+
 import java.util.List;
 
 
 /**
  * Created by mansa on 10/8/15.
  */
-public class ContactsMining extends ListActivity  {
+public class Contacts extends ListActivity  {
 
     ListView contactList;
 
@@ -63,7 +65,7 @@ public class ContactsMining extends ListActivity  {
             public void done(List<ParseUser> objects, ParseException e) {
                 if (e == null) {
                     // The query was successful.
-                    Intent bucket = new Intent(ContactsMining.this, Map.class);
+                    Intent bucket = new Intent(Contacts.this, Map.class);
 
                     Bundle b = new Bundle();
                     b.putString("phonenumber", phone_number);
@@ -72,7 +74,7 @@ public class ContactsMining extends ListActivity  {
                 } else {
                     // Something went wrong.
 
-                    AlertDialog.Builder builder = new AlertDialog.Builder(ContactsMining.this);
+                    AlertDialog.Builder builder = new AlertDialog.Builder(Contacts.this);
                     builder.setMessage("Invite " + phone_number + " to Furl." );
                     builder.setTitle(R.string.send_invitation);
                     builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {

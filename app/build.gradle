@@ -52,5 +52,5 @@ dependencies {
     compile('com.twitter.sdk.android:twitter:1.8.0@aar') {
         transitive = true;
     }
-    compile 'com.google.android.gms:play-services:8.1.0'
+    compile 'com.google.android.gms:play-services-maps:8.1.0'
 }

@@ -1,7 +1,9 @@
-package org.nganga.furl;
+package org.nganga.furl.userInfo;
 
 import android.app.Activity;
 import android.os.Bundle;
+
+import org.nganga.furl.R;
 
 /**
  * Created by mansa on 11/8/15.

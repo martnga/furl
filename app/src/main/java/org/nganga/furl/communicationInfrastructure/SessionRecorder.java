@@ -1,7 +1,9 @@
-package org.nganga.furl;
+package org.nganga.furl.communicationInfrastructure;
 
 import com.crashlytics.android.Crashlytics;
 import com.twitter.sdk.android.core.Session;
+
+import org.nganga.furl.MyApp;
 
 public class SessionRecorder {
     public static Session recordInitialSessionState(Session twitterSession,

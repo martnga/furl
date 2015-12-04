@@ -1,13 +1,11 @@
-package org.nganga.furl.activity;
+package org.nganga.furl.authenticateActivity;
 
 import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
-import android.view.View;
 import android.widget.CheckBox;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.crashlytics.android.Crashlytics;
@@ -21,12 +19,10 @@ import com.digits.sdk.android.DigitsSession;
 import com.parse.ParseException;
 import com.parse.ParseUser;
 import com.parse.SignUpCallback;
-import com.twitter.sdk.android.core.identity.TwitterLoginButton;
 
-import org.nganga.furl.AccountSettings;
-import org.nganga.furl.FurlMain;
+import org.nganga.furl.userInfo.AccountSettings;
 import org.nganga.furl.R;
-import org.nganga.furl.SessionRecorder;
+import org.nganga.furl.communicationInfrastructure.SessionRecorder;
 
 import java.util.Random;
 

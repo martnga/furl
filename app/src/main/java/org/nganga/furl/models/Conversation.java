@@ -1,6 +1,6 @@
 package org.nganga.furl.models;
 
-import org.nganga.furl.FurlMain;
+import org.nganga.furl.communicationInfrastructure.FurlMain;
 
 import java.util.Date;
 

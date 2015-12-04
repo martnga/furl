@@ -1,5 +1,5 @@
 
-package org.nganga.furl.activity;
+package org.nganga.furl.authenticateActivity;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -8,8 +8,8 @@ import android.os.Bundle;
 
 import com.digits.sdk.android.Digits;
 
-import org.nganga.furl.FurlMain;
-import org.nganga.furl.SessionRecorder;
+import org.nganga.furl.communicationInfrastructure.FurlMain;
+import org.nganga.furl.communicationInfrastructure.SessionRecorder;
 
 import com.twitter.sdk.android.Twitter;
 import com.twitter.sdk.android.core.Session;

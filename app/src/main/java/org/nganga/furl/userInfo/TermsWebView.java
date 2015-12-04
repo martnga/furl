@@ -1,4 +1,4 @@
-package org.nganga.furl;
+package org.nganga.furl.userInfo;
 
 
         import android.app.Activity;
@@ -7,6 +7,8 @@ package org.nganga.furl;
         import android.webkit.WebView;
         import android.webkit.WebViewClient;
         import android.widget.ImageView;
+
+        import org.nganga.furl.R;
 
 /**
  * Created by nganga on 9/17/15.

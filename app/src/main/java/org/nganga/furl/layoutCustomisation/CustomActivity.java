@@ -1,12 +1,8 @@
-package org.nganga.furl.custom;
+package org.nganga.furl.layoutCustomisation;
 
 import android.support.v4.app.FragmentActivity;
 import android.view.View;
 import android.view.View.OnClickListener;
-
-import com.parse.ParseException;
-import com.parse.ParseObject;
-import com.parse.SaveCallback;
 
 import org.nganga.furl.utils.TouchEffect;
 

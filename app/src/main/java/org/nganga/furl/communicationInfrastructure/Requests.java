@@ -1,8 +1,9 @@
-package org.nganga.furl;
+package org.nganga.furl.communicationInfrastructure;
 
 import android.os.Bundle;
 
-import org.nganga.furl.custom.CustomActivity;
+import org.nganga.furl.R;
+import org.nganga.furl.layoutCustomisation.CustomActivity;
 
 /**
  * Created by mansa on 10/15/15.

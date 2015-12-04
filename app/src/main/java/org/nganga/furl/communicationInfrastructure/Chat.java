@@ -1,4 +1,4 @@
-package org.nganga.furl;
+package org.nganga.furl.communicationInfrastructure;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,32 +7,9 @@ import android.widget.ImageView;
 
 import com.crashlytics.android.Crashlytics;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-
-import android.content.Context;
-import android.os.Handler;
-import android.text.InputType;
-import android.text.format.DateUtils;
-import android.view.ViewGroup;
-import android.view.inputmethod.InputMethodManager;
-import android.widget.AbsListView;
-import android.widget.BaseAdapter;
-import android.widget.EditText;
-import android.widget.ListView;
-import android.widget.TextView;
-
-import org.nganga.furl.custom.CustomActivity;
-import org.nganga.furl.models.Conversation;
-import org.nganga.furl.utils.Const;
+import org.nganga.furl.R;
+import org.nganga.furl.layoutCustomisation.CustomActivity;
 import org.nganga.furl.view.AvenirTextView;
-
-import com.parse.FindCallback;
-import com.parse.ParseException;
-import com.parse.ParseObject;
-import com.parse.ParseQuery;
-import com.parse.SaveCallback;
 
 /**
  * Created by mansa on 10/14/15.
